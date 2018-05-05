@@ -3,7 +3,6 @@ package com.ohair.stephen.edp;
 import java.io.IOException;
 import java.util.Optional;
 
-import org.apache.beam.examples.DebuggingWordCount.FilterTextFn;
 import org.apache.beam.sdk.transforms.DoFn;
 import org.apache.beam.sdk.transforms.PTransform;
 import org.apache.beam.sdk.transforms.ParDo;
