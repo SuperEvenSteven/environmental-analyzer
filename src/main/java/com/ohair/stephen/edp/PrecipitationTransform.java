@@ -1,11 +1,15 @@
 package com.ohair.stephen.edp;
 
+import java.io.IOException;
 import java.util.Optional;
 
+import org.apache.beam.examples.DebuggingWordCount.FilterTextFn;
 import org.apache.beam.sdk.transforms.DoFn;
 import org.apache.beam.sdk.transforms.PTransform;
 import org.apache.beam.sdk.transforms.ParDo;
 import org.apache.beam.sdk.values.PCollection;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.google.api.services.bigquery.model.TableRow;
 
@@ -21,6 +25,8 @@ public class PrecipitationTransform extends PTransform<PCollection<TableRow>, PC
 	 * Generated UUID
 	 */
 	private static final long serialVersionUID = -2055027164272213259L;
+
+	private static final Logger logger = LoggerFactory.getLogger(PrecipitationTransform.class);
 
 	/**
 	 * Takes rows from a table and returns a filtered rows that contain reported
@@ -62,7 +68,7 @@ public class PrecipitationTransform extends PTransform<PCollection<TableRow>, PC
 		private static final int NO_TEMP_COUNTS = 0;
 
 		@ProcessElement
-		public void processElement(ProcessContext c) {
+		public void processElement(ProcessContext c) throws IOException {
 			TableRow rowIn = c.element();
 
 			// if there's no reported precipitation we want to skip this table row
@@ -111,6 +117,7 @@ public class PrecipitationTransform extends PTransform<PCollection<TableRow>, PC
 						.set("temperature_reading_counts", tempReadingCount) // Count of temperature readings
 						.set("percipitation_cms", precipCms); // Total precipitation recorded in centimeters
 				c.output(rowOut);
+				logger.info("added precipitation row:" + rowOut.toPrettyString());
 			} // otherwise ignore this element
 		}
 
