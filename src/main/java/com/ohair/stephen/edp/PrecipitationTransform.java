@@ -47,7 +47,7 @@ public class PrecipitationTransform extends PTransform<PCollection<TableRow>, PC
 	 */
 	static class SimplifyAndFilterPrecipitationFn extends DoFn<TableRow, TableRow> {
 
-		private static final float CMS_PER_INCH = 2.54f;
+		private static final double CMS_PER_INCH = 2.54f;
 
 		/**
 		 * Generated UUID
@@ -55,15 +55,15 @@ public class PrecipitationTransform extends PTransform<PCollection<TableRow>, PC
 		private static final long serialVersionUID = -2702511629178536470L;
 
 		// As defined by the GSOD Table Schema
-		private static final float MISSING = 99.99f;
-		private static final float MINESCULE_TRACE_AMOUNT = .00f;
+		private static final double MISSING = 99.99f;
+		private static final double MINESCULE_TRACE_AMOUNT = .00f;
 
 		@ProcessElement
 		public void processElement(ProcessContext c) {
 			TableRow rowIn = c.element();
 
 			// if there's no reported precipitation we want to skip this table row
-			float precipitationInches = (float) rowIn.get("prcp");
+			double precipitationInches = (double) rowIn.get("prcp");
 			if ((precipitationInches != MISSING) || //
 					precipitationInches != MINESCULE_TRACE_AMOUNT) {
 
@@ -75,14 +75,14 @@ public class PrecipitationTransform extends PTransform<PCollection<TableRow>, PC
 				}
 
 				// the mean temperature is mandatory, if not present skip this table row
-				float meanTempF = (float) rowIn.get("temp");
+				double meanTempF = (double) rowIn.get("temp");
 				if (meanTempF == 9999.9f) {
 					return;
 				}
 
 				// if either the min or max temps are absent then skip this table row
-				float maxTempF = (float) rowIn.get("min");
-				float minTempF = (float) rowIn.get("max");
+				double maxTempF = (double) rowIn.get("min");
+				double minTempF = (double) rowIn.get("max");
 				if (maxTempF == 9999.9f || minTempF == 9999.9F) {
 					return;
 				}
@@ -91,10 +91,10 @@ public class PrecipitationTransform extends PTransform<PCollection<TableRow>, PC
 				String date = toBQDate((String) rowIn.get("year"), (String) rowIn.get("mo"), (String) rowIn.get("da"));
 
 				// perform all conversions after checking the necessary attributes are present
-				float meanTempC = toCelsiusDeg(meanTempF);
-				float minTempC = toCelsiusDeg(minTempF);
-				float maxTempC = toCelsiusDeg(maxTempF);
-				float precipCms = precipitationInches / CMS_PER_INCH;
+				double meanTempC = toCelsiusDeg(meanTempF);
+				double minTempC = toCelsiusDeg(minTempF);
+				double maxTempC = toCelsiusDeg(maxTempF);
+				double precipCms = precipitationInches / CMS_PER_INCH;
 
 				// create output table row
 				TableRow rowOut = new TableRow() //
@@ -115,7 +115,7 @@ public class PrecipitationTransform extends PTransform<PCollection<TableRow>, PC
 		 * @param temperatureF
 		 * @return temperatureC
 		 */
-		private static float toCelsiusDeg(float temperatureF) {
+		private static double toCelsiusDeg(double temperatureF) {
 			return ((temperatureF - 32) * 5) / 9;
 		}
 
