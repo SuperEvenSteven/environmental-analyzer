@@ -105,13 +105,13 @@ public class PrecipitationTransform extends PTransform<PCollection<TableRow>, PC
 
 				// create output table row
 				TableRow rowOut = new TableRow() //
-						.set("stn", rowIn.get("stn")) // Weather station name
-						.set("dataUTC", date) // Date in UTC, no time component
-						.set("meanDegC", meanTempC) // Mean temperature in Celsius degrees
-						.set("minDegC", minTempC) // Minimum temperature in Celsius degrees
-						.set("maxDegC", maxTempC) // Maximum temperature in Celsius degrees
-						.set("tempReadingCounts", tempReadingCount) // Count of temperature readings
-						.set("precipInCms", precipCms); // Total precipitation recorded in centimeters
+						.set("station_name", rowIn.get("stn")) // Weather station name
+						.set("date_utc", date) // Date in UTC, no time component
+						.set("mean_deg_c", meanTempC) // Mean temperature in Celsius degrees
+						.set("min_deg_c", minTempC) // Minimum temperature in Celsius degrees
+						.set("max_deg_c", maxTempC) // Maximum temperature in Celsius degrees
+						.set("temperature_reading_counts", tempReadingCount) // Count of temperature readings
+						.set("percipitation_cms", precipCms); // Total precipitation recorded in centimeters
 				c.output(rowOut);
 			} // otherwise ignore this element
 		}
