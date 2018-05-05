@@ -3,6 +3,9 @@ package com.ohair.stephen.edp;
 import java.io.IOException;
 import java.util.Optional;
 
+import org.apache.beam.examples.DebuggingWordCount.FilterTextFn;
+import org.apache.beam.sdk.metrics.Counter;
+import org.apache.beam.sdk.metrics.Metrics;
 import org.apache.beam.sdk.transforms.DoFn;
 import org.apache.beam.sdk.transforms.PTransform;
 import org.apache.beam.sdk.transforms.ParDo;
@@ -57,7 +60,7 @@ public class PrecipitationTransform extends PTransform<PCollection<TableRow>, PC
 		 */
 		private static final long serialVersionUID = -2702511629178536470L;
 
-		private static final Logger logger = LoggerFactory.getLogger(PrecipitationTransform.class);
+		private static final Logger logger = LoggerFactory.getLogger(SimplifyAndFilterPrecipitationFn.class);
 
 		// As defined by the GSOD Table Schema
 		private static final double MISSING_PRECIPITATION = 99.99f;
@@ -65,6 +68,13 @@ public class PrecipitationTransform extends PTransform<PCollection<TableRow>, PC
 		private static final double MINESCULE_TRACE_AMOUNT = .00f;
 		private static final double CMS_PER_INCH = 2.54f;
 		private static final int NO_TEMP_COUNTS = 0;
+
+		private final Counter missingPrecipitation = Metrics.counter(SimplifyAndFilterPrecipitationFn.class,
+				"missingPrecipitation");
+		private final Counter missingMeanTemps = Metrics.counter(SimplifyAndFilterPrecipitationFn.class,
+				"missingMeanTempss");
+		private final Counter missingTempCounts = Metrics.counter(SimplifyAndFilterPrecipitationFn.class,
+				"missingTempCounts");
 
 		@ProcessElement
 		public void processElement(ProcessContext c) throws IOException {
@@ -81,6 +91,7 @@ public class PrecipitationTransform extends PTransform<PCollection<TableRow>, PC
 
 				int tempReadingCount = (int) Optional.ofNullable(rowIn.get("count_tmp")).orElse(NO_TEMP_COUNTS);
 				if (tempReadingCount == NO_TEMP_COUNTS) {
+					missingTempCounts.inc();
 					logger.debug("skipping, missing count_tmp");
 					return;
 				}
@@ -88,6 +99,7 @@ public class PrecipitationTransform extends PTransform<PCollection<TableRow>, PC
 				// the mean temperature is mandatory, if not present skip this table row
 				double meanTempF = (double) Optional.ofNullable(rowIn.get("temp")).orElse(MISSING_TEMP);
 				if (meanTempF == MISSING_TEMP) {
+					missingMeanTemps.inc();
 					logger.debug("skipping, missing temp");
 					return;
 				}
@@ -121,6 +133,7 @@ public class PrecipitationTransform extends PTransform<PCollection<TableRow>, PC
 				c.output(rowOut);
 				logger.debug("added precipitation row:" + rowOut.toPrettyString());
 			} else {
+				missingPrecipitation.inc();
 				// otherwise ignore this element
 				logger.debug("skipping, missing precipitation measurement");
 			}
