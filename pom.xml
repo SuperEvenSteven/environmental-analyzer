@@ -149,7 +149,7 @@
 						<manifest>
 							<addClasspath>true</addClasspath>
 							<classpathPrefix>lib/</classpathPrefix>
-							<mainClass>BatchProcessGSOD</mainClass>
+							<mainClass>com.ohair.stephen.edp.BatchProcessGSOD</mainClass>
 						</manifest>
 					</archive>
 				</configuration>
