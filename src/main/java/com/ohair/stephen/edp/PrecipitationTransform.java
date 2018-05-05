@@ -25,8 +25,6 @@ public class PrecipitationTransform extends PTransform<PCollection<TableRow>, PC
 	 */
 	private static final long serialVersionUID = -2055027164272213259L;
 
-	private static final Logger logger = LoggerFactory.getLogger(PrecipitationTransform.class);
-
 	/**
 	 * Takes rows from a table and returns a filtered rows that contain reported
 	 * precipitation with temperature data.
@@ -58,6 +56,8 @@ public class PrecipitationTransform extends PTransform<PCollection<TableRow>, PC
 		 * Generated UUID
 		 */
 		private static final long serialVersionUID = -2702511629178536470L;
+
+		private static final Logger logger = LoggerFactory.getLogger(PrecipitationTransform.class);
 
 		// As defined by the GSOD Table Schema
 		private static final double MISSING_PRECIPITATION = 99.99f;
@@ -120,7 +120,7 @@ public class PrecipitationTransform extends PTransform<PCollection<TableRow>, PC
 						.set("percipitation_cms", precipCms); // Total precipitation recorded in centimeters
 				c.output(rowOut);
 				logger.debug("added precipitation row:" + rowOut.toPrettyString());
-			}else {
+			} else {
 				// otherwise ignore this element
 				logger.debug("skipping, missing precipitation measurement");
 			}
