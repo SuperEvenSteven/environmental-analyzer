@@ -1,5 +1,7 @@
 package com.ohair.stephen.edp;
 
+import java.util.Optional;
+
 import org.apache.beam.sdk.transforms.DoFn;
 import org.apache.beam.sdk.transforms.PTransform;
 import org.apache.beam.sdk.transforms.ParDo;
@@ -47,16 +49,17 @@ public class PrecipitationTransform extends PTransform<PCollection<TableRow>, PC
 	 */
 	static class SimplifyAndFilterPrecipitationFn extends DoFn<TableRow, TableRow> {
 
-		private static final double CMS_PER_INCH = 2.54f;
-
 		/**
 		 * Generated UUID
 		 */
 		private static final long serialVersionUID = -2702511629178536470L;
 
 		// As defined by the GSOD Table Schema
-		private static final double MISSING = 99.99f;
+		private static final double MISSING_PRECIPITATION = 99.99f;
+		private static final double MISSING_TEMP = 9999.9f;
 		private static final double MINESCULE_TRACE_AMOUNT = .00f;
+		private static final double CMS_PER_INCH = 2.54f;
+		private static final int NO_TEMP_COUNTS = 0;
 
 		@ProcessElement
 		public void processElement(ProcessContext c) {
@@ -64,26 +67,28 @@ public class PrecipitationTransform extends PTransform<PCollection<TableRow>, PC
 
 			// if there's no reported precipitation we want to skip this table row
 			double precipitationInches = (double) rowIn.get("prcp");
-			if ((precipitationInches != MISSING) || //
+			if ((precipitationInches != MISSING_PRECIPITATION) || //
 					precipitationInches != MINESCULE_TRACE_AMOUNT) {
 
-				// if the number of observations used in calculating the mean is zero then it's
-				// safe to say we don't have a mean
-				int tempReadingCount = (int) rowIn.get("count_tmp");
-				if (tempReadingCount == 0) {
+				// If the number of observations used in calculating the mean is zero then it's
+				// safe to say we don't have a mean, this data contains nulls.
+				// If null default to no temperature counts found and skip.
+
+				int tempReadingCount = (int) Optional.of(rowIn.get("count_tmp")).orElse(NO_TEMP_COUNTS);
+				if (tempReadingCount == NO_TEMP_COUNTS) {
 					return;
 				}
 
 				// the mean temperature is mandatory, if not present skip this table row
-				double meanTempF = (double) rowIn.get("temp");
-				if (meanTempF == 9999.9f) {
+				double meanTempF = (double) Optional.of(rowIn.get("temp")).orElse(MISSING_TEMP);
+				if (meanTempF == MISSING_TEMP) {
 					return;
 				}
 
 				// if either the min or max temps are absent then skip this table row
-				double maxTempF = (double) rowIn.get("min");
-				double minTempF = (double) rowIn.get("max");
-				if (maxTempF == 9999.9f || minTempF == 9999.9F) {
+				double maxTempF = (double) Optional.of(rowIn.get("min")).orElse(MISSING_TEMP);
+				double minTempF = (double) Optional.of(rowIn.get("max")).orElse(MISSING_TEMP);
+				if (maxTempF == MISSING_TEMP || minTempF == MISSING_TEMP) {
 					return;
 				}
 
