@@ -87,10 +87,11 @@ public class PrecipitationTransform extends PTransform<PCollection<TableRow>, PC
 					precipitationInches != MINESCULE_TRACE_AMOUNT) {
 				containPrecipitation.inc();
 				// If the number of observations used in calculating the mean is zero then it's
-				// safe to say we don't have a mean, this data contains nulls.
+				// safe to say we don't have a mean, this data contains nulls.s
 				// If null default to no temperature counts found and skip.
 
-				int tempReadingCount = (int) Optional.ofNullable(rowIn.get("count_temp")).orElse(NO_TEMP_COUNTS);
+				int tempReadingCount = Integer
+						.parseInt((String) Optional.ofNullable(rowIn.get("count_temp")).orElse(NO_TEMP_COUNTS));
 				if (tempReadingCount == NO_TEMP_COUNTS) {
 					missingTempCounts.inc();
 					logger.debug("skipping, missing count_tmp");
