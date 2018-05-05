@@ -66,7 +66,7 @@ public class PrecipitationTransform extends PTransform<PCollection<TableRow>, PC
 			TableRow rowIn = c.element();
 
 			// if there's no reported precipitation we want to skip this table row
-			double precipitationInches = (double) rowIn.get("prcp");
+			double precipitationInches = (double) Optional.ofNullable(rowIn.get("prcp")).orElse(MISSING_PRECIPITATION);
 			if ((precipitationInches != MISSING_PRECIPITATION) || //
 					precipitationInches != MINESCULE_TRACE_AMOUNT) {
 
@@ -74,20 +74,20 @@ public class PrecipitationTransform extends PTransform<PCollection<TableRow>, PC
 				// safe to say we don't have a mean, this data contains nulls.
 				// If null default to no temperature counts found and skip.
 
-				int tempReadingCount = (int) Optional.of(rowIn.get("count_tmp")).orElse(NO_TEMP_COUNTS);
+				int tempReadingCount = (int) Optional.ofNullable(rowIn.get("count_tmp")).orElse(NO_TEMP_COUNTS);
 				if (tempReadingCount == NO_TEMP_COUNTS) {
 					return;
 				}
 
 				// the mean temperature is mandatory, if not present skip this table row
-				double meanTempF = (double) Optional.of(rowIn.get("temp")).orElse(MISSING_TEMP);
+				double meanTempF = (double) Optional.ofNullable(rowIn.get("temp")).orElse(MISSING_TEMP);
 				if (meanTempF == MISSING_TEMP) {
 					return;
 				}
 
 				// if either the min or max temps are absent then skip this table row
-				double maxTempF = (double) Optional.of(rowIn.get("min")).orElse(MISSING_TEMP);
-				double minTempF = (double) Optional.of(rowIn.get("max")).orElse(MISSING_TEMP);
+				double maxTempF = (double) Optional.ofNullable(rowIn.get("min")).orElse(MISSING_TEMP);
+				double minTempF = (double) Optional.ofNullable(rowIn.get("max")).orElse(MISSING_TEMP);
 				if (maxTempF == MISSING_TEMP || minTempF == MISSING_TEMP) {
 					return;
 				}
