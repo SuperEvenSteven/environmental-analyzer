@@ -72,7 +72,7 @@ public class PrecipitationTransform extends PTransform<PCollection<TableRow>, PC
 
 			// if there's no reported precipitation we want to skip this table row
 			double precipitationInches = (double) Optional.ofNullable(rowIn.get("prcp")).orElse(MISSING_PRECIPITATION);
-			if ((precipitationInches != MISSING_PRECIPITATION) || //
+			if ((precipitationInches != MISSING_PRECIPITATION) && //
 					precipitationInches != MINESCULE_TRACE_AMOUNT) {
 
 				// If the number of observations used in calculating the mean is zero then it's
@@ -81,12 +81,14 @@ public class PrecipitationTransform extends PTransform<PCollection<TableRow>, PC
 
 				int tempReadingCount = (int) Optional.ofNullable(rowIn.get("count_tmp")).orElse(NO_TEMP_COUNTS);
 				if (tempReadingCount == NO_TEMP_COUNTS) {
+					logger.debug("skipping, missing count_tmp");
 					return;
 				}
 
 				// the mean temperature is mandatory, if not present skip this table row
 				double meanTempF = (double) Optional.ofNullable(rowIn.get("temp")).orElse(MISSING_TEMP);
 				if (meanTempF == MISSING_TEMP) {
+					logger.debug("skipping, missing temp");
 					return;
 				}
 
@@ -94,6 +96,7 @@ public class PrecipitationTransform extends PTransform<PCollection<TableRow>, PC
 				double maxTempF = (double) Optional.ofNullable(rowIn.get("min")).orElse(MISSING_TEMP);
 				double minTempF = (double) Optional.ofNullable(rowIn.get("max")).orElse(MISSING_TEMP);
 				if (maxTempF == MISSING_TEMP || minTempF == MISSING_TEMP) {
+					logger.debug("skipping, missing min max");
 					return;
 				}
 
@@ -116,8 +119,11 @@ public class PrecipitationTransform extends PTransform<PCollection<TableRow>, PC
 						.set("temperature_reading_counts", tempReadingCount) // Count of temperature readings
 						.set("percipitation_cms", precipCms); // Total precipitation recorded in centimeters
 				c.output(rowOut);
-				logger.info("added precipitation row:" + rowOut.toPrettyString());
-			} // otherwise ignore this element
+				logger.debug("added precipitation row:" + rowOut.toPrettyString());
+			}else {
+				// otherwise ignore this element
+				logger.debug("skipping, missing precipitation measurement");
+			}
 		}
 
 		/**
