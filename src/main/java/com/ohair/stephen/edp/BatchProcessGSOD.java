@@ -33,8 +33,13 @@ public class BatchProcessGSOD {
 
 		// Build the table schema for the output table.
 		List<TableFieldSchema> fields = new ArrayList<>();
-		fields.add(new TableFieldSchema().setName("month").setType("INTEGER"));
-		fields.add(new TableFieldSchema().setName("tornado_count").setType("INTEGER"));
+		fields.add(new TableFieldSchema().setName("station_name").setType("STRING"));
+		fields.add(new TableFieldSchema().setName("date_utc").setType("DATE"));
+		fields.add(new TableFieldSchema().setName("mean_deg_c").setType("FLOAT"));
+		fields.add(new TableFieldSchema().setName("min_deg_c").setType("FLOAT"));
+		fields.add(new TableFieldSchema().setName("max_deg_c").setType("FLOAT"));
+		fields.add(new TableFieldSchema().setName("temperature_reading_counts").setType("INTEGER"));
+		fields.add(new TableFieldSchema().setName("percipitation_cms").setType("FLOAT"));
 		TableSchema schema = new TableSchema().setFields(fields);
 
 		p.apply(BigQueryIO.readTableRows() //

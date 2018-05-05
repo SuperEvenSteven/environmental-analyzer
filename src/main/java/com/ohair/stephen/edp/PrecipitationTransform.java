@@ -1,12 +1,8 @@
 package com.ohair.stephen.edp;
 
-import org.apache.beam.sdk.transforms.Count;
 import org.apache.beam.sdk.transforms.DoFn;
 import org.apache.beam.sdk.transforms.PTransform;
 import org.apache.beam.sdk.transforms.ParDo;
-import org.apache.beam.sdk.transforms.DoFn.ProcessContext;
-import org.apache.beam.sdk.transforms.DoFn.ProcessElement;
-import org.apache.beam.sdk.values.KV;
 import org.apache.beam.sdk.values.PCollection;
 
 import com.google.api.services.bigquery.model.TableRow;
@@ -25,17 +21,12 @@ public class PrecipitationTransform extends PTransform<PCollection<TableRow>, PC
 	private static final long serialVersionUID = -2055027164272213259L;
 
 	/**
-	 * Takes rows from a table and generates a table of counts.
+	 * Takes rows from a table and returns a filtered rows that contain reported
+	 * precipitation with temperature data.
 	 *
 	 * <p>
 	 * The input schema is described by
-	 * https://developers.google.com/bigquery/docs/dataset-gsod . The output
-	 * contains the total number of tornadoes found in each month in the following
-	 * schema:
-	 * <ul>
-	 * <li>month: integer</li>
-	 * <li>tornado_count: integer</li>
-	 * </ul>
+	 * https://developers.google.com/bigquery/docs/dataset-gsod .
 	 */
 
 	@Override

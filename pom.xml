@@ -141,6 +141,15 @@
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-jar-plugin</artifactId>
 				<version>${maven-jar-plugin.version}</version>
+				<configuration>
+					<archive>
+						<manifest>
+							<addClasspath>true</addClasspath>
+							<classpathPrefix>lib/</classpathPrefix>
+							<mainClass>BatchProcessGSOD</mainClass>
+						</manifest>
+					</archive>
+				</configuration>
 			</plugin>
 
 			<!-- Configures `mvn package` to produce a bundled jar ("fat jar") for 
