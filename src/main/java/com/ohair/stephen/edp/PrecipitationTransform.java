@@ -68,6 +68,8 @@ public class PrecipitationTransform extends PTransform<PCollection<TableRow>, PC
 		private static final double CMS_PER_INCH = 2.54f;
 		private static final int NO_TEMP_COUNTS = 0;
 
+		private final Counter containPrecipitation = Metrics.counter(SimplifyAndFilterPrecipitationFn.class,
+				"containPrecipitation");
 		private final Counter missingPrecipitation = Metrics.counter(SimplifyAndFilterPrecipitationFn.class,
 				"missingPrecipitation");
 		private final Counter missingMeanTemps = Metrics.counter(SimplifyAndFilterPrecipitationFn.class,
@@ -83,7 +85,7 @@ public class PrecipitationTransform extends PTransform<PCollection<TableRow>, PC
 			double precipitationInches = (double) Optional.ofNullable(rowIn.get("prcp")).orElse(MISSING_PRECIPITATION);
 			if ((precipitationInches != MISSING_PRECIPITATION) && //
 					precipitationInches != MINESCULE_TRACE_AMOUNT) {
-
+				containPrecipitation.inc();
 				// If the number of observations used in calculating the mean is zero then it's
 				// safe to say we don't have a mean, this data contains nulls.
 				// If null default to no temperature counts found and skip.
