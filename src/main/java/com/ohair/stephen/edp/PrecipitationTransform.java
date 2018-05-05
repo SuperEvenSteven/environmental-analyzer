@@ -47,23 +47,25 @@ public class PrecipitationTransform extends PTransform<PCollection<TableRow>, PC
 	 */
 	static class SimplifyAndFilterPrecipitationFn extends DoFn<TableRow, TableRow> {
 
+		private static final float CMS_PER_INCH = 2.54f;
+
 		/**
 		 * Generated UUID
 		 */
 		private static final long serialVersionUID = -2702511629178536470L;
 
 		// As defined by the GSOD Table Schema
-		private static final String MISSING = "99.99";
-		private static final String MINESCULE_TRACE_AMOUNT = ".00";
+		private static final float MISSING = 99.99f;
+		private static final float MINESCULE_TRACE_AMOUNT = .00f;
 
 		@ProcessElement
 		public void processElement(ProcessContext c) {
 			TableRow rowIn = c.element();
 
 			// if there's no reported precipitation we want to skip this table row
-			String precipitationInches = (String) rowIn.get("prcp");
-			if ((!precipitationInches.contentEquals(MISSING)) || //
-					!precipitationInches.contentEquals(MINESCULE_TRACE_AMOUNT)) {
+			float precipitationInches = (float) rowIn.get("prcp");
+			if ((precipitationInches != MISSING) || //
+					precipitationInches != MINESCULE_TRACE_AMOUNT) {
 
 				// if the number of observations used in calculating the mean is zero then it's
 				// safe to say we don't have a mean
@@ -92,7 +94,7 @@ public class PrecipitationTransform extends PTransform<PCollection<TableRow>, PC
 				float meanTempC = toCelsiusDeg(meanTempF);
 				float minTempC = toCelsiusDeg(minTempF);
 				float maxTempC = toCelsiusDeg(maxTempF);
-				float precipCms = Float.parseFloat(precipitationInches) / 2.54f;
+				float precipCms = precipitationInches / CMS_PER_INCH;
 
 				// create output table row
 				TableRow rowOut = new TableRow() //
