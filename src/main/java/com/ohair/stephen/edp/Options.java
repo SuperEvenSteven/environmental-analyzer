@@ -6,7 +6,7 @@ import org.apache.beam.sdk.options.PipelineOptions;
 import org.apache.beam.sdk.options.Validation;
 
 /**
- * Options supported by {@link BatchProcessGSOD}.
+ * Options supported by {@link BatchProcessPipeline}.
  *
  * <p>
  * Inherits standard configuration options.

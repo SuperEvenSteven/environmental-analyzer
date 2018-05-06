@@ -76,6 +76,8 @@ public class PrecipitationTransform extends PTransform<PCollection<TableRow>, PC
 				"missingMeanTempss");
 		private final Counter missingTempCounts = Metrics.counter(SimplifyAndFilterPrecipitationFn.class,
 				"missingTempCounts");
+		private final Counter newRows = Metrics.counter(SimplifyAndFilterPrecipitationFn.class,
+				"newRows");
 
 		@ProcessElement
 		public void processElement(ProcessContext c) throws IOException {
@@ -133,6 +135,7 @@ public class PrecipitationTransform extends PTransform<PCollection<TableRow>, PC
 						.set("temperature_reading_counts", tempReadingCount) // Count of temperature readings
 						.set("percipitation_cms", precipCms); // Total precipitation recorded in centimeters
 				c.output(rowOut);
+				newRows.inc();
 				logger.debug("added precipitation row:" + rowOut.toPrettyString());
 			} else {
 				missingPrecipitation.inc();
@@ -142,7 +145,7 @@ public class PrecipitationTransform extends PTransform<PCollection<TableRow>, PC
 		}
 
 		/**
-		 * Converts given temperature from Farenheit to Xelsius degrees.
+		 * Converts given temperature from Farenheit to Celsius degrees.
 		 * 
 		 * @param temperatureF
 		 * @return temperatureC

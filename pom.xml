@@ -156,7 +156,7 @@
 						<manifest>
 							<addClasspath>true</addClasspath>
 							<classpathPrefix>lib/</classpathPrefix>
-							<mainClass>com.ohair.stephen.edp.BatchProcessGSOD</mainClass>
+							<mainClass>com.ohair.stephen.edp.BatchProcessPipeline</mainClass>
 						</manifest>
 					</archive>
 				</configuration>

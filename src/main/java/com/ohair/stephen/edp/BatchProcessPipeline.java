@@ -1,14 +1,8 @@
 package com.ohair.stephen.edp;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.apache.beam.sdk.Pipeline;
 import org.apache.beam.sdk.io.gcp.bigquery.BigQueryIO;
 import org.apache.beam.sdk.options.PipelineOptionsFactory;
-
-import com.google.api.services.bigquery.model.TableFieldSchema;
-import com.google.api.services.bigquery.model.TableSchema;
 
 /**
  * Simple class that extracts GSOD records from Google BigQuery and converts
@@ -23,7 +17,7 @@ import com.google.api.services.bigquery.model.TableSchema;
  * @see <a href=
  *      "https://github.com/apache/beam/blob/master/examples/java/src/main/java/org/apache/beam/examples/cookbook/BigQueryTornadoes.java">attribution</a>
  */
-public class BatchProcessGSOD {
+public class BatchProcessPipeline {
 
 	/*
 	 * Static utility methods used for data transforms and pipeline execution.
@@ -31,22 +25,11 @@ public class BatchProcessGSOD {
 	private static void runBigQueryGSOD(Options options) {
 		Pipeline p = Pipeline.create(options);
 
-		// Build the table schema for the output table.
-		List<TableFieldSchema> fields = new ArrayList<>();
-		fields.add(new TableFieldSchema().setName("station_name").setType("STRING"));
-		fields.add(new TableFieldSchema().setName("date_utc").setType("DATE"));
-		fields.add(new TableFieldSchema().setName("mean_deg_c").setType("FLOAT"));
-		fields.add(new TableFieldSchema().setName("min_deg_c").setType("FLOAT"));
-		fields.add(new TableFieldSchema().setName("max_deg_c").setType("FLOAT"));
-		fields.add(new TableFieldSchema().setName("temperature_reading_counts").setType("INTEGER"));
-		fields.add(new TableFieldSchema().setName("percipitation_cms").setType("FLOAT"));
-		TableSchema schema = new TableSchema().setFields(fields);
-
 		p.apply(BigQueryIO.readTableRows() //
 				.from(options.getInput())) //
 				.apply(new PrecipitationTransform()) //
 				.apply(BigQueryIO.writeTableRows() //
-						.to(options.getOutput()).withSchema(schema)//
+						.to(options.getOutput()).withSchema(CombinedDataModel.tableSchema())//
 						.withCreateDisposition(BigQueryIO.Write.CreateDisposition.CREATE_IF_NEEDED) //
 						.withWriteDisposition(BigQueryIO.Write.WriteDisposition.WRITE_TRUNCATE));
 
