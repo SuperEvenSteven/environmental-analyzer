@@ -17,3 +17,7 @@ Uses Apache Beam to create a distributed data pipeline that combines NexRAD and 
 - [Google Cloud Platform - Dataflow SDK Examples](https://github.com/GoogleCloudPlatform/DataflowSDK-examples/tree/master)
 - [Valliappa Lakshmanan - Data Science Examples](https://github.com/GoogleCloudPlatform/data-science-on-gcp)
 
+## License
+For all files in this repository that don't contain explicit licensing, the MIT license then applies.
+See the accompanying LICENSE for more details.
+
