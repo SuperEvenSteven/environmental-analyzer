@@ -27,28 +27,21 @@ public class CombinedDataModel {
 	private final float minDegreesC;
 	private final float maxDegreesC;
 	private final int tempReadCounts;
-	private final float precipitationCms;
+	private final float precipitationCm;
 
 	/**
 	 * Constructor.
 	 * 
-	 * @param stationName
-	 * @param dateUtc
-	 * @param meanDegreesC
-	 * @param minDegreesC
-	 * @param maxDegreesC
-	 * @param tempReadCounts
-	 * @param precipitationCms
+	 * @param ModelBuilder
 	 */
-	public CombinedDataModel(String stationName, Date dateUtc, float meanDegreesC, float minDegreesC, float maxDegreesC,
-			int tempReadCounts, float precipitationCms) {
-		this.stationName = stationName;
-		this.dateUtc = dateUtc;
-		this.meanDegreesC = meanDegreesC;
-		this.minDegreesC = minDegreesC;
-		this.maxDegreesC = maxDegreesC;
-		this.tempReadCounts = tempReadCounts;
-		this.precipitationCms = precipitationCms;
+	public CombinedDataModel(ModelBuilder builder) {
+		this.stationName = builder.stationName;
+		this.dateUtc = builder.dateUtc;
+		this.meanDegreesC = builder.meanDegreesC;
+		this.minDegreesC = builder.minDegreesC;
+		this.maxDegreesC = builder.maxDegreesC;
+		this.tempReadCounts = builder.tempReadCounts;
+		this.precipitationCm = builder.precipitationCm;
 	}
 
 	/*
@@ -80,7 +73,7 @@ public class CombinedDataModel {
 	}
 
 	public float getPrecipitationCms() {
-		return precipitationCms;
+		return precipitationCm;
 	}
 
 	/**
@@ -94,7 +87,7 @@ public class CombinedDataModel {
 		sb.append(minDegreesC).append(",");
 		sb.append(maxDegreesC).append(",");
 		sb.append(tempReadCounts).append(",");
-		sb.append(precipitationCms);
+		sb.append(precipitationCm);
 		return sb.toString();
 	}
 
@@ -115,5 +108,76 @@ public class CombinedDataModel {
 		fields.add(new TableFieldSchema().setName("precipitation").setType("FLOAT"));
 		TableSchema schema = new TableSchema().setFields(fields);
 		return schema;
+	}
+
+	/*
+	 * Builder patter as per: https://stackoverflow.com/a/20940894/370003
+	 */
+	private static class ModelBuilder {
+		/*
+		 * Private member variables
+		 */
+		private String stationName;
+		private Date dateUtc;
+		private float meanDegreesC;
+		private float minDegreesC;
+		private float maxDegreesC;
+		private int tempReadCounts;
+		private float precipitationCm;
+
+		/**
+		 * Constructor.
+		 * 
+		 */
+		public ModelBuilder() {
+		}
+
+		/*
+		 * Public mutator methods
+		 */
+
+		public ModelBuilder setStationName(String stationName) {
+			this.stationName = stationName;
+			return this;
+		}
+
+		public ModelBuilder setDateUtc(Date dateUtc) {
+			this.dateUtc = dateUtc;
+			return this;
+		}
+
+		public ModelBuilder setMeanDegreesC(float meanDegreesC) {
+			this.meanDegreesC = meanDegreesC;
+			return this;
+		}
+
+		public ModelBuilder setMinDegreesC(float minDegreesC) {
+			this.minDegreesC = minDegreesC;
+			return this;
+		}
+
+		public ModelBuilder setMaxDegreesC(float maxDegreesC) {
+			this.maxDegreesC = maxDegreesC;
+			return this;
+		}
+
+		public ModelBuilder setTempReadCounts(int tempReadCounts) {
+			this.tempReadCounts = tempReadCounts;
+			return this;
+		}
+
+		public ModelBuilder setPrecipitationCm(int precipitationCm) {
+			this.precipitationCm = precipitationCm;
+			return this;
+		}
+
+		/**
+		 * Builder build.
+		 * 
+		 * @return {@link CombinedDataModel}
+		 */
+		public CombinedDataModel build() {
+			return (new CombinedDataModel(this));
+		}
 	}
 }
