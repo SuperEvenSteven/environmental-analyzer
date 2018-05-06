@@ -1,7 +1,12 @@
 package com.ohair.stephen.edp.transform;
 
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.TimeZone;
 
 import org.apache.beam.sdk.transforms.DoFn;
 import org.apache.beam.sdk.transforms.PTransform;
@@ -38,26 +43,37 @@ public final class NexRadTransform extends PTransform<PCollection<String>, PColl
 		private static final Logger log = LoggerFactory.getLogger(SimplifyAndFilterPrecipitationFn.class);
 
 		@ProcessElement
-		public void processElement(ProcessContext c) throws IOException {
-			
+		public void processElement(ProcessContext c) throws IOException, ParseException {
+
 			String tarFile = c.element();
-            try (GcsNexradL2Read hourly = new GcsNexradL2Read(tarFile)) {
-              for (RadialDatasetSweep volume : hourly.getVolumeScans()) {
+			ModelBuilder builder = new NexRadDataModel.ModelBuilder();
+			try (GcsNexradL2Read hourly = new GcsNexradL2Read(tarFile)) {
+				for (RadialDatasetSweep volume : hourly.getVolumeScans()) {
+					builder.setDateUtc(formatDateUtc(""));
 					// List<AnomalousPropagation> apPixels = APDetector.findAP(volume);
 					// log.info("Found " + apPixels.size() + " AP pixels");
 					// for (AnomalousPropagation ap : apPixels) {
 					// c.output(ap);
 					// }
-              }
-            } catch (Exception e) {
-              log.error("Skipping " + tarFile, e);
-            }
-			
-			
-			
-			
-			ModelBuilder builder = new NexRadDataModel.ModelBuilder();
+				}
+			} catch (Exception e) {
+				log.error("Skipping " + tarFile, e);
+			}
+
+			builder.setDateUtc(formatDateUtc(""));
 			c.output(builder.build());
+		}
+
+		/**
+		 * Takes a NexRad date time and formats it to a {@link java.util.Data} as UTC.
+		 * 
+		 * @param date
+		 * @throws ParseException
+		 */
+		private static Date formatDateUtc(String date) throws ParseException {
+			DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+			df.setTimeZone(TimeZone.getTimeZone("UTC"));
+			return df.parse(date);
 		}
 	}
 }
