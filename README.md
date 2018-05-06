@@ -4,7 +4,7 @@
 Uses Apache Beam to create a distributed data pipeline that combines NexRAD and GSOD datasets to CSV output.
 
 ## Data Sets Schemas
-- [GSOD](https://developers.google.com/bigquery/docs/dataset-gsod)
+- [GSOD Weather Data](https://bigquery.cloud.google.com/dataset/bigquery-public-data:noaa_gsod)
 - [GSOD Weather Station](https://bigquery.cloud.google.com/table/bigquery-public-data:noaa_gsod.stations?tab=schema)
 - [NexRAD Level II](https://cloud.google.com/storage/docs/public-datasets/nexrad)
 
