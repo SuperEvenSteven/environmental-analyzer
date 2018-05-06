@@ -44,38 +44,6 @@ public class CombinedDataModel {
 		this.precipitationCm = builder.precipitationCm;
 	}
 
-	/*
-	 * Public accessor methods
-	 */
-
-	public String getStationName() {
-		return stationName;
-	}
-
-	public Date getDateUtc() {
-		return dateUtc;
-	}
-
-	public float getMeanDegreesC() {
-		return meanDegreesC;
-	}
-
-	public float getMinDegreesC() {
-		return minDegreesC;
-	}
-
-	public float getMaxDegreesC() {
-		return maxDegreesC;
-	}
-
-	public int getTempReadCounts() {
-		return tempReadCounts;
-	}
-
-	public float getPrecipitationCms() {
-		return precipitationCm;
-	}
-
 	/**
 	 * @return csv representation of a {@link CombinedDataModel}
 	 */
@@ -111,9 +79,9 @@ public class CombinedDataModel {
 	}
 
 	/*
-	 * Builder patter as per: https://stackoverflow.com/a/20940894/370003
+	 * Builder pattern as per: https://stackoverflow.com/a/20940894/370003
 	 */
-	private static class ModelBuilder {
+	public static class ModelBuilder {
 		/*
 		 * Private member variables
 		 */
