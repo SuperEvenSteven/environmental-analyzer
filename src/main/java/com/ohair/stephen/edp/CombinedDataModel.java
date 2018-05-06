@@ -16,7 +16,7 @@ import com.google.api.services.bigquery.model.TableSchema;
  *
  */
 @ThreadSafe
-public class CombinedDataModel {
+public final class CombinedDataModel {
 
 	/*
 	 * Private member variables

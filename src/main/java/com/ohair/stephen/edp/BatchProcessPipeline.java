@@ -17,7 +17,7 @@ import org.apache.beam.sdk.options.PipelineOptionsFactory;
  * @see <a href=
  *      "https://github.com/apache/beam/blob/master/examples/java/src/main/java/org/apache/beam/examples/cookbook/BigQueryTornadoes.java">attribution</a>
  */
-public class BatchProcessPipeline {
+public final class BatchProcessPipeline {
 
 	/*
 	 * Static utility methods used for data transforms and pipeline execution.
@@ -28,6 +28,7 @@ public class BatchProcessPipeline {
 		p.apply(BigQueryIO.readTableRows() //
 				.from(options.getInput())) //
 				.apply(new PrecipitationTransform()) //
+				.apply(new NexRadTransform()) //
 				.apply(BigQueryIO.writeTableRows() //
 						.to(options.getOutput()).withSchema(CombinedDataModel.tableSchema())//
 						.withCreateDisposition(BigQueryIO.Write.CreateDisposition.CREATE_IF_NEEDED) //

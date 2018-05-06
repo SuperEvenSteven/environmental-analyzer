@@ -20,12 +20,8 @@ import com.google.api.services.bigquery.model.TableRow;
  * @author Stephen O'Hair
  *
  */
-public class PrecipitationTransform extends PTransform<PCollection<TableRow>, PCollection<TableRow>> {
-
-	/**
-	 * Generated UUID
-	 */
-	private static final long serialVersionUID = -2055027164272213259L;
+@SuppressWarnings("serial")
+public final class PrecipitationTransform extends PTransform<PCollection<TableRow>, PCollection<TableRow>> {
 
 	/**
 	 * Takes rows from a table and returns a filtered rows that contain reported
@@ -54,11 +50,6 @@ public class PrecipitationTransform extends PTransform<PCollection<TableRow>, PC
 	 */
 	static class SimplifyAndFilterPrecipitationFn extends DoFn<TableRow, TableRow> {
 
-		/**
-		 * Generated UUID
-		 */
-		private static final long serialVersionUID = -2702511629178536470L;
-
 		private static final Logger logger = LoggerFactory.getLogger(SimplifyAndFilterPrecipitationFn.class);
 
 		// As defined by the GSOD Table Schema
@@ -76,8 +67,7 @@ public class PrecipitationTransform extends PTransform<PCollection<TableRow>, PC
 				"missingMeanTempss");
 		private final Counter missingTempCounts = Metrics.counter(SimplifyAndFilterPrecipitationFn.class,
 				"missingTempCounts");
-		private final Counter newRows = Metrics.counter(SimplifyAndFilterPrecipitationFn.class,
-				"newRows");
+		private final Counter newRows = Metrics.counter(SimplifyAndFilterPrecipitationFn.class, "newRows");
 
 		@ProcessElement
 		public void processElement(ProcessContext c) throws IOException {
