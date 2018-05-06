@@ -3,7 +3,7 @@
 # environmental-analyzer
 Uses Apache Beam to create a distributed data pipeline that combines NexRAD and GSOD datasets to CSV output.
 
-##Data Sets
+## Data Sets
 - [GSOD Public Datasets Schema](https://developers.google.com/bigquery/docs/dataset-gsod)
 - [NexRAD Level II](https://cloud.google.com/storage/docs/public-datasets/nexrad)
 
