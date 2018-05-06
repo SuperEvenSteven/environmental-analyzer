@@ -1,4 +1,4 @@
-package com.ohair.stephen.edp;
+package com.ohair.stephen.edp.model;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -10,7 +10,7 @@ import com.google.api.services.bigquery.model.TableFieldSchema;
 import com.google.api.services.bigquery.model.TableSchema;
 
 /**
- * Represents a combination of GSOD and NexRAD data.
+ * Represents the combined model of GSOD and NexRAD data.
  * 
  * @author Stephen O'Hair
  *
@@ -23,11 +23,11 @@ public final class CombinedDataModel {
 	 */
 	private final String stationName;
 	private final Date dateUtc;
-	private final float meanDegreesC;
-	private final float minDegreesC;
-	private final float maxDegreesC;
+	private final double meanDegreesC;
+	private final double minDegreesC;
+	private final double maxDegreesC;
 	private final int tempReadCounts;
-	private final float precipitationCm;
+	private final double precipitationCm;
 
 	/**
 	 * Constructor.
@@ -87,11 +87,11 @@ public final class CombinedDataModel {
 		 */
 		private String stationName;
 		private Date dateUtc;
-		private float meanDegreesC;
-		private float minDegreesC;
-		private float maxDegreesC;
+		private double meanDegreesC;
+		private double minDegreesC;
+		private double maxDegreesC;
 		private int tempReadCounts;
-		private float precipitationCm;
+		private double precipitationCm;
 
 		/**
 		 * Constructor.
@@ -114,17 +114,17 @@ public final class CombinedDataModel {
 			return this;
 		}
 
-		public ModelBuilder setMeanDegreesC(float meanDegreesC) {
+		public ModelBuilder setMeanDegreesC(double meanDegreesC) {
 			this.meanDegreesC = meanDegreesC;
 			return this;
 		}
 
-		public ModelBuilder setMinDegreesC(float minDegreesC) {
+		public ModelBuilder setMinDegreesC(double minDegreesC) {
 			this.minDegreesC = minDegreesC;
 			return this;
 		}
 
-		public ModelBuilder setMaxDegreesC(float maxDegreesC) {
+		public ModelBuilder setMaxDegreesC(double maxDegreesC) {
 			this.maxDegreesC = maxDegreesC;
 			return this;
 		}
@@ -134,7 +134,7 @@ public final class CombinedDataModel {
 			return this;
 		}
 
-		public ModelBuilder setPrecipitationCm(int precipitationCm) {
+		public ModelBuilder setPrecipitationCm(double precipitationCm) {
 			this.precipitationCm = precipitationCm;
 			return this;
 		}

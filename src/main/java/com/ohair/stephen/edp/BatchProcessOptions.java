@@ -19,7 +19,7 @@ import org.apache.beam.sdk.options.Validation;
  * <li>--days</li>
  * </ul>
  */
-public interface Options extends PipelineOptions {
+public interface BatchProcessOptions extends PipelineOptions {
 	/*
 	 * Default Options
 	 */

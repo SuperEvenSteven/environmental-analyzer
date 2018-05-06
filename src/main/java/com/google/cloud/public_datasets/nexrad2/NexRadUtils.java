@@ -1,9 +1,3 @@
-package com.ohair.stephen.edp;
-
-import java.time.YearMonth;
-import java.util.ArrayList;
-import java.util.List;
-
 /*
  * Copyright (C) 2017 Google Inc.
  *
@@ -20,6 +14,22 @@ import java.util.List;
  * the License.
  */
 
+package com.google.cloud.public_datasets.nexrad2;
+
+import java.time.YearMonth;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.apache.beam.sdk.transforms.DoFn;
+import org.apache.beam.sdk.transforms.DoFn.ProcessContext;
+import org.apache.beam.sdk.transforms.DoFn.ProcessElement;
+import org.apache.beam.sdk.transforms.GroupByKey;
+import org.apache.beam.sdk.transforms.ParDo;
+import org.apache.beam.sdk.values.KV;
+import org.apache.beam.sdk.values.PCollection;
+
+import com.ohair.stephen.edp.BatchProcessOptions;
+
 /**
  * Originally sourced from Valliappa Lakshmanan's GitHub project: <a href=
  * "https://github.com/GoogleCloudPlatform/training-data-analyst/blob/master/blogs/nexrad2/src/com/google/cloud/public_datasets/nexrad2/APPipeline.java"
@@ -27,7 +37,7 @@ import java.util.List;
  */
 public final class NexRadUtils {
 
-	public static List<String> getTarNameParams(Options options) {
+	public static List<String> getTarNameParams(BatchProcessOptions options) {
 		// parse command-line options
 		String[] radars = options.getRadars().split(",");
 		int[] years = toIntArray(options.getYears().split(","));
@@ -71,5 +81,40 @@ public final class NexRadUtils {
 			result[i] = Integer.parseInt(s[i]);
 		}
 		return result;
+	}
+
+	/**
+	 * Rebundling improves parallelism. Each worker in Apache Beam works on only one
+	 * bundle, so if the number of bundles < # of potential workers, you will have
+	 * limited parallelism. If that's case, use this rebundle utility
+	 * 
+	 * @param name
+	 *            of rebundling transforms
+	 * @param inputs
+	 *            the collection to rebundle
+	 * @param nbundles
+	 *            number of bundles
+	 * @return
+	 */
+	@SuppressWarnings("serial")
+	public static <T> PCollection<T> rebundle(String name, PCollection<T> inputs, int nbundles) {
+		return inputs//
+				.apply(name + "-1", ParDo.of(new DoFn<T, KV<Integer, T>>() {
+					@ProcessElement
+					public void processElement(ProcessContext c) throws Exception {
+						T input = c.element();
+						Integer key = (int) (Math.random() * nbundles);
+						c.output(KV.of(key, input));
+					}
+				})) //
+				.apply(name + "-2", GroupByKey.<Integer, T>create())
+				.apply(name + "-3", ParDo.of(new DoFn<KV<Integer, Iterable<T>>, T>() {
+					@ProcessElement
+					public void processElement(ProcessContext c) throws Exception {
+						for (T item : c.element().getValue()) {
+							c.output(item);
+						}
+					}
+				}));
 	}
 }
