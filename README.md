@@ -11,5 +11,6 @@ Sample adapted from:
 
 ## Useful links
 - [GSOD Public Datasets Schema](https://developers.google.com/bigquery/docs/dataset-gsod)
-- [Google Cloud Platform - Data Science](https://github.com/GoogleCloudPlatform/DataflowSDK-examples/tree/master-1.x)
-- [Valliappa Lakshmanan - Nexrad Pipeline Example](https://github.com/GoogleCloudPlatform/data-science-on-gcp)
+- [Google Cloud Platform - Dataflow SDK Examples](https://github.com/GoogleCloudPlatform/DataflowSDK-examples/tree/master)
+- [Valliappa Lakshmanan - Data Science Examples](https://github.com/GoogleCloudPlatform/data-science-on-gcp)
+
