@@ -151,44 +151,45 @@ public final class GSODTransform extends PTransform<PCollection<TableRow>, PColl
 				log.debug("skipping, missing precipitation measurement");
 			}
 		}
+	}
 
-		/**
-		 * Converts given temperature from Farenheit to Celsius degrees.
-		 * 
-		 * @param temperatureF
-		 * @return temperatureC
-		 */
-		@VisibleForTesting
-		private static double asCelsiusDeg(double temperatureF) {
-			return ((temperatureF - 32) * 5) / 9;
-		}
+	/**
+	 * Converts given temperature from Farenheit to Celsius degrees.
+	 * 
+	 * @param temperatureF
+	 * @return temperatureC
+	 */
+	@VisibleForTesting
+	static double asCelsiusDeg(double temperatureF) {
+		return ((temperatureF - 32) * 5) / 9;
+	}
 
-		/**
-		 * Returns a BigQuery standard sql date in the canonical format
-		 * 'YYYY-[M]M-[D]D'.
-		 * 
-		 * @param year
-		 * @param month
-		 * @param day
-		 * @return
-		 */
-		private static String toBQDate(String year, String month, String day) {
-			StringBuffer sb = new StringBuffer();
-			sb.append(year).append("-").append(month).append("-").append(day);
-			return sb.toString();
-		}
+	/**
+	 * Returns a BigQuery standard sql date in the canonical format
+	 * 'YYYY-[M]M-[D]D'.
+	 * 
+	 * @param year
+	 * @param month
+	 * @param day
+	 * @return
+	 */
+	@VisibleForTesting
+	static String toBQDate(String year, String month, String day) {
+		StringBuffer sb = new StringBuffer();
+		sb.append(year).append("-").append(month).append("-").append(day);
+		return sb.toString();
+	}
 
-		/**
-		 * Returns
-		 * 
-		 * @param year
-		 * @param month
-		 * @param day
-		 * @return java.util.Date
-		 */
-		@VisibleForTesting
-		static Date asDateUtc(String year, String month, String day) {
-			return null;
-		}
+	/**
+	 * Returns
+	 * 
+	 * @param year
+	 * @param month
+	 * @param day
+	 * @return java.util.Date
+	 */
+	@VisibleForTesting
+	static Date asDateUtc(String year, String month, String day) {
+		return null;
 	}
 }
