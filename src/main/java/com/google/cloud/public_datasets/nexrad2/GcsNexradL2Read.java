@@ -43,6 +43,8 @@ public class GcsNexradL2Read implements AutoCloseable {
      * 
      * @param tarFileName
      *            name of the compressed volume scan
+     * @throws IOException
+     *            if unable to read tar file
      */
     public GcsNexradL2Read(String tarFileName) throws IOException {
         this.untar = GcsUntar.fromGcsOrLocal(tarFileName);

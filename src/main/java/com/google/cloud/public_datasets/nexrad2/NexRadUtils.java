@@ -87,13 +87,16 @@ public final class NexRadUtils {
      * workers, you will have limited parallelism. If that's case, use this
      * rebundle utility
      * 
+     * @param <T> 
+ *                the expected class of the value
      * @param name
      *            of rebundling transforms
      * @param inputs
      *            the collection to rebundle
      * @param nbundles
      *            number of bundles
-     * @return a rebundled collection
+     * @return T
+     *            a rebundled collection
      */
     @SuppressWarnings("serial")
     public static <T> PCollection<T> rebundle(String name, PCollection<T> inputs, int nbundles) {

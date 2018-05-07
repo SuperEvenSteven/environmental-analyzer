@@ -6,6 +6,6 @@ deploy: # Publish static Doxygen html files to gh-pages branch, accessible at ht
   skip-cleanup: true
   github-token: $GITHUB_TOKEN  # Set in travis-ci.org dashboard, marked secure
   keep-history: true
-  local-dir: target/apidocs
+  local-dir: target/site
   on:
     branch: master

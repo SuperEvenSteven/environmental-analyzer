@@ -5,6 +5,7 @@
 	<artifactId>environmental-analyzer</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>Environment Analyzer</name>
+	<url>https://superevensteven.github.io/environmental-analyzer/</url>
 	<description>Uses apache beam to create a distributed pipeline that combine radar and gsod datasets.</description>
 
 	<properties>
@@ -166,18 +167,15 @@
 				</configuration>
 			</plugin>
 
-			<!-- Javadoc -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-javadoc-plugin</artifactId>
-				<executions>
-					<execution>
-						<id>attach-javadocs</id>
-						<goals>
-							<goal>jar</goal>
-						</goals>
-					</execution>
-				</executions>
+				<artifactId>maven-site-plugin</artifactId>
+				<version>3.3</version>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-project-info-reports-plugin</artifactId>
+				<version>2.9</version>
 			</plugin>
 
 			<!-- Ensure that the Maven jar plugin runs before the Maven shade plugin by listing the plugin higher within the file. -->
@@ -242,6 +240,24 @@
 			</plugins>
 		</pluginManagement>
 	</build>
+
+	<reporting>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<version>2.9</version>
+				<reportSets>
+					<reportSet>
+						<id>aggregate</id>
+						<reports>
+							<report>aggregate</report>
+						</reports>
+					</reportSet>
+				</reportSets>
+			</plugin>
+		</plugins>
+	</reporting>
 
 	<repositories>
 		<!-- For Netcdf -->
