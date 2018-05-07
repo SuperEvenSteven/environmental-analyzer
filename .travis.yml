@@ -1,2 +1,11 @@
 language: java
 script: mvn clean package
+
+deploy: # Publish static Doxygen html files to gh-pages branch, accessible at https://<username>.github.io/PSMoveSteamVRBridge
+  provider: pages
+  skip-cleanup: true
+  github-token: $GITHUB_TOKEN  # Set in travis-ci.org dashboard, marked secure
+  keep-history: true
+  local-dir: target/apidocs
+  on:
+    branch: master
