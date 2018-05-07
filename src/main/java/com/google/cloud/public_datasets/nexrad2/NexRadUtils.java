@@ -83,8 +83,9 @@ public final class NexRadUtils {
 
     /**
      * Rebundling improves parallelism. Each worker in Apache Beam works on only
-     * one bundle, so if the number of bundles < # of potential workers, you
-     * will have limited parallelism. If that's case, use this rebundle utility
+     * one bundle, so if the number of bundles less than the number of potential
+     * workers, you will have limited parallelism. If that's case, use this
+     * rebundle utility
      * 
      * @param name
      *            of rebundling transforms
@@ -92,7 +93,7 @@ public final class NexRadUtils {
      *            the collection to rebundle
      * @param nbundles
      *            number of bundles
-     * @return
+     * @return a rebundled collection
      */
     @SuppressWarnings("serial")
     public static <T> PCollection<T> rebundle(String name, PCollection<T> inputs, int nbundles) {

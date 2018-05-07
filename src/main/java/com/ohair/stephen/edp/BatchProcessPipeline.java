@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.apache.beam.sdk.Pipeline;
 import org.apache.beam.sdk.coders.StringUtf8Coder;
-import org.apache.beam.sdk.io.TextIO;
 import org.apache.beam.sdk.io.gcp.bigquery.BigQueryIO;
 import org.apache.beam.sdk.options.PipelineOptionsFactory;
 import org.apache.beam.sdk.transforms.Create;
@@ -36,7 +35,7 @@ import com.ohair.stephen.edp.transform.NexRadTransform;
  * 
  * @author Stephen O'Hair
  * @see <a href=
- *      "https://github.com/apache/beam/blob/master/examples/java/src/main/java/org/apache/beam/examples/cookbook/BigQueryTornadoes.java">attribution</a></br>
+ *      "https://github.com/apache/beam/blob/master/examples/java/src/main/java/org/apache/beam/examples/cookbook/BigQueryTornadoes.java">attribution</a><br>
  *      <a href=
  *      "https://github.com/GoogleCloudPlatform/training-data-analyst/blob/master/blogs/nexrad2/src/com/google/cloud/public_datasets/nexrad2/APPipeline.java">attribution</a>
  */

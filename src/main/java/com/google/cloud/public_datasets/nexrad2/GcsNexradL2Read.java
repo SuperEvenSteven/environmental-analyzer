@@ -42,6 +42,7 @@ public class GcsNexradL2Read implements AutoCloseable {
      * NWS_NEXRAD_NXL2DP_KAMA_20160503000000_20160503005959.tar
      * 
      * @param tarFileName
+     *            name of the compressed volume scan
      */
     public GcsNexradL2Read(String tarFileName) throws IOException {
         this.untar = GcsUntar.fromGcsOrLocal(tarFileName);

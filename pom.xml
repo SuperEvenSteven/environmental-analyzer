@@ -1,5 +1,4 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.ohair.stephen</groupId>
@@ -24,8 +23,8 @@
 		<maven-jar-plugin.version>3.0.2</maven-jar-plugin.version>
 		<maven-shade-plugin.version>3.1.0</maven-shade-plugin.version>
 		<google-cloud-storage.version>1.0.1</google-cloud-storage.version>
-        <netcdf.version>4.6.11</netcdf.version>
-        <cdm.version>4.6.11</cdm.version>
+		<netcdf.version>4.6.11</netcdf.version>
+		<cdm.version>4.6.11</cdm.version>
 	</properties>
 	<dependencies>
 		<!-- Adds a dependency on the Beam SDK. -->
@@ -48,8 +47,7 @@
 			<artifactId>google-api-client</artifactId>
 			<version>${google-clients.version}</version>
 			<exclusions>
-				<!-- Exclude an old version of guava that is being pulled in by a transitive 
-					dependency of google-api-client -->
+				<!-- Exclude an old version of guava that is being pulled in by a transitive dependency of google-api-client -->
 				<exclusion>
 					<groupId>com.google.guava</groupId>
 					<artifactId>guava-jdk5</artifactId>
@@ -62,8 +60,7 @@
 			<artifactId>google-api-services-bigquery</artifactId>
 			<version>${bigquery.version}</version>
 			<exclusions>
-				<!-- Exclude an old version of guava that is being pulled in by a transitive 
-					dependency of google-api-client -->
+				<!-- Exclude an old version of guava that is being pulled in by a transitive dependency of google-api-client -->
 				<exclusion>
 					<groupId>com.google.guava</groupId>
 					<artifactId>guava-jdk5</artifactId>
@@ -76,8 +73,7 @@
 			<artifactId>google-http-client</artifactId>
 			<version>${google-clients.version}</version>
 			<exclusions>
-				<!-- Exclude an old version of guava that is being pulled in by a transitive 
-					dependency of google-api-client -->
+				<!-- Exclude an old version of guava that is being pulled in by a transitive dependency of google-api-client -->
 				<exclusion>
 					<groupId>com.google.guava</groupId>
 					<artifactId>guava-jdk5</artifactId>
@@ -90,8 +86,7 @@
 			<artifactId>google-api-services-pubsub</artifactId>
 			<version>${pubsub.version}</version>
 			<exclusions>
-				<!-- Exclude an old version of guava that is being pulled in by a transitive 
-					dependency of google-api-client -->
+				<!-- Exclude an old version of guava that is being pulled in by a transitive dependency of google-api-client -->
 				<exclusion>
 					<groupId>com.google.guava</groupId>
 					<artifactId>guava-jdk5</artifactId>
@@ -171,8 +166,21 @@
 				</configuration>
 			</plugin>
 
-			<!-- Ensure that the Maven jar plugin runs before the Maven shade plugin 
-				by listing the plugin higher within the file. -->
+			<!-- Javadoc -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>attach-javadocs</id>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
+			<!-- Ensure that the Maven jar plugin runs before the Maven shade plugin by listing the plugin higher within the file. -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-jar-plugin</artifactId>
@@ -188,8 +196,8 @@
 				</configuration>
 			</plugin>
 
-			<!-- Configures `mvn package` to produce a bundled jar ("fat jar") for 
-				runners that require this for job submission to a cluster. -->
+			<!-- Configures `mvn package` to produce a bundled jar ("fat jar") for runners that require this for job submission to 
+				a cluster. -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-shade-plugin</artifactId>
@@ -214,8 +222,7 @@
 								</filter>
 							</filters>
 							<transformers>
-								<transformer
-									implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer" />
+								<transformer implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer" />
 							</transformers>
 						</configuration>
 					</execution>
