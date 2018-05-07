@@ -33,34 +33,34 @@ import com.google.cloud.storage.StorageOptions;
  */
 public class GcsNexradL2List {
 
-	public static List<String> getFiles(String radar, int year, int month, int day) {
-		Storage storage = StorageOptions.getDefaultInstance().getService();
-		String bucket = "gcp-public-data-nexrad-l2";
-		String date = String.format("%d/%02d/%02d", year, month, day);
-		Iterable<Blob> blobs = storage.list(bucket, BlobListOption.prefix(date + "/" + radar)).iterateAll();
-		List<String> result = new ArrayList<>();
-		for (Blob blob : blobs) {
-			result.add("gs://" + blob.getBucket() + "/" + blob.getName());
-		}
-		return result;
-	}
+    public static List<String> getFiles(String radar, int year, int month, int day) {
+        Storage storage = StorageOptions.getDefaultInstance().getService();
+        String bucket = "gcp-public-data-nexrad-l2";
+        String date = String.format("%d/%02d/%02d", year, month, day);
+        Iterable<Blob> blobs = storage.list(bucket, BlobListOption.prefix(date + "/" + radar)).iterateAll();
+        List<String> result = new ArrayList<>();
+        for (Blob blob : blobs) {
+            result.add("gs://" + blob.getBucket() + "/" + blob.getName());
+        }
+        return result;
+    }
 
-	public static List<String> getFiles(String radar, int year, int month) {
-		// how many days in this month?
-		YearMonth yearMonthObject = YearMonth.of(year, month);
-		int maxday = yearMonthObject.lengthOfMonth();
-		List<String> result = new ArrayList<String>();
-		for (int day = 1; day <= maxday; ++day) {
-			result.addAll(getFiles(radar, year, month, day));
-		}
-		return result;
-	}
+    public static List<String> getFiles(String radar, int year, int month) {
+        // how many days in this month?
+        YearMonth yearMonthObject = YearMonth.of(year, month);
+        int maxday = yearMonthObject.lengthOfMonth();
+        List<String> result = new ArrayList<String>();
+        for (int day = 1; day <= maxday; ++day) {
+            result.addAll(getFiles(radar, year, month, day));
+        }
+        return result;
+    }
 
-	public static void main(String[] args) throws Exception {
-		List<String> files = getFiles("KYUX", 2012, 7, 23);
-		Collections.sort(files);
-		System.out.println(files.size() + " files");
-		System.out.println(" from " + files.get(0));
-		System.out.println(" to " + files.get(files.size() - 1));
-	}
+    public static void main(String[] args) throws Exception {
+        List<String> files = getFiles("KYUX", 2012, 7, 23);
+        Collections.sort(files);
+        System.out.println(files.size() + " files");
+        System.out.println(" from " + files.get(0));
+        System.out.println(" to " + files.get(files.size() - 1));
+    }
 }

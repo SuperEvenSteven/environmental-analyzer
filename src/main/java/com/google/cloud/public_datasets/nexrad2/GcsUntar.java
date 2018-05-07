@@ -47,10 +47,10 @@ import com.google.common.io.Files;
  * <pre>
  * String tarFile = "gs://gcp-public-data-nexrad-l2/2016/05/03/KAMA/NWS_NEXRAD_NXL2DP_KAMA_20160503000000_20160503005959.tar";
  * try (GcsUntar untar = GcsUntar.fromGcsOrLocal(tarFile)) {
- * 	for (File f : untar.getFiles()) {
- * 		System.out.println(f.getName());
- * 		// do something with the file
- * 	}
+ *     for (File f : untar.getFiles()) {
+ *         System.out.println(f.getName());
+ *         // do something with the file
+ *     }
  * }
  * </pre>
  * 
@@ -58,128 +58,128 @@ import com.google.common.io.Files;
  *
  */
 public class GcsUntar implements AutoCloseable {
-	private static final Logger log = LoggerFactory.getLogger(GcsUntar.class);
+    private static final Logger log = LoggerFactory.getLogger(GcsUntar.class);
 
-	private final File tarFileLocation;
-	private final File tempDirectory;
-	private File[] untarred;
+    private final File tarFileLocation;
+    private final File tempDirectory;
+    private File[] untarred;
 
-	private GcsUntar(File tarFileLocation, File tempDirectory) {
-		this.tarFileLocation = tarFileLocation;
-		this.tempDirectory = tempDirectory;
-	}
+    private GcsUntar(File tarFileLocation, File tempDirectory) {
+        this.tarFileLocation = tarFileLocation;
+        this.tempDirectory = tempDirectory;
+    }
 
-	public static GcsUntar fromLocalTar(File tarFileName) {
-		return new GcsUntar(tarFileName, Files.createTempDir());
-	}
+    public static GcsUntar fromLocalTar(File tarFileName) {
+        return new GcsUntar(tarFileName, Files.createTempDir());
+    }
 
-	public static GcsUntar fromGcsTar(String bucket, String blobName) throws IOException {
-		File tmpDir = Files.createTempDir();
-		File localFile = downloadFromGcs(bucket, blobName, tmpDir);
-		return new GcsUntar(localFile, tmpDir);
-	}
+    public static GcsUntar fromGcsTar(String bucket, String blobName) throws IOException {
+        File tmpDir = Files.createTempDir();
+        File localFile = downloadFromGcs(bucket, blobName, tmpDir);
+        return new GcsUntar(localFile, tmpDir);
+    }
 
-	public static GcsUntar fromGcsOrLocal(String gcsOrLocal) throws IOException {
-		final String PROTOCOL = "gs://";
-		if (gcsOrLocal.startsWith(PROTOCOL)) {
-			// parse google cloud storage URL
-			int bucketStart = PROTOCOL.length();
-			int bucketEnd = gcsOrLocal.indexOf('/', bucketStart);
-			String bucket = gcsOrLocal.substring(bucketStart, bucketEnd);
-			String blobName = gcsOrLocal.substring(bucketEnd + 1);
-			return fromGcsTar(bucket, blobName);
-		} else {
-			// local
-			return fromLocalTar(new File(gcsOrLocal));
-		}
-	}
+    public static GcsUntar fromGcsOrLocal(String gcsOrLocal) throws IOException {
+        final String PROTOCOL = "gs://";
+        if (gcsOrLocal.startsWith(PROTOCOL)) {
+            // parse google cloud storage URL
+            int bucketStart = PROTOCOL.length();
+            int bucketEnd = gcsOrLocal.indexOf('/', bucketStart);
+            String bucket = gcsOrLocal.substring(bucketStart, bucketEnd);
+            String blobName = gcsOrLocal.substring(bucketEnd + 1);
+            return fromGcsTar(bucket, blobName);
+        } else {
+            // local
+            return fromLocalTar(new File(gcsOrLocal));
+        }
+    }
 
-	public File[] getFiles() throws IOException {
-		if (untarred == null) {
-			try {
-				untarred = unTar(tarFileLocation, tempDirectory);
-			} catch (ArchiveException e) {
-				new IOException(e);
-			}
-		}
-		return untarred;
-	}
+    public File[] getFiles() throws IOException {
+        if (untarred == null) {
+            try {
+                untarred = unTar(tarFileLocation, tempDirectory);
+            } catch (ArchiveException e) {
+                new IOException(e);
+            }
+        }
+        return untarred;
+    }
 
-	private static File downloadFromGcs(String bucketName, String blobName, File tmpDir) throws IOException {
-		Storage storage = StorageOptions.getDefaultInstance().getService();
-		File fileName = File.createTempFile("download", "bytes", tmpDir);
-		try (ReadChannel reader = storage.reader(bucketName, blobName);
-				FileOutputStream writer = new FileOutputStream(fileName)) {
-			ByteBuffer bytes = ByteBuffer.allocate(64 * 1024);
-			while (reader.read(bytes) > 0) {
-				bytes.flip();
-				writer.getChannel().write(bytes);
-				bytes.clear();
-			}
-		}
-		return fileName;
-	}
+    private static File downloadFromGcs(String bucketName, String blobName, File tmpDir) throws IOException {
+        Storage storage = StorageOptions.getDefaultInstance().getService();
+        File fileName = File.createTempFile("download", "bytes", tmpDir);
+        try (ReadChannel reader = storage.reader(bucketName, blobName);
+                FileOutputStream writer = new FileOutputStream(fileName)) {
+            ByteBuffer bytes = ByteBuffer.allocate(64 * 1024);
+            while (reader.read(bytes) > 0) {
+                bytes.flip();
+                writer.getChannel().write(bytes);
+                bytes.clear();
+            }
+        }
+        return fileName;
+    }
 
-	private static File[] unTar(final File inputFile, final File outputDir)
-			throws FileNotFoundException, IOException, ArchiveException {
-		// from
-		// http://stackoverflow.com/questions/315618/how-do-i-extract-a-tar-file-in-java/7556307#7556307
-		log.info("tar xf " + inputFile + " to " + outputDir);
-		final List<File> untaredFiles = new ArrayList<File>();
-		final InputStream is = new FileInputStream(inputFile);
-		final TarArchiveInputStream debInputStream = (TarArchiveInputStream) new ArchiveStreamFactory()
-				.createArchiveInputStream("tar", is);
-		TarArchiveEntry entry = null;
-		while ((entry = (TarArchiveEntry) debInputStream.getNextEntry()) != null) {
-			final File outputFile = new File(outputDir, entry.getName());
-			if (entry.isDirectory()) {
-				if (!outputFile.exists()) {
-					if (!outputFile.mkdirs()) {
-						throw new IllegalStateException(
-								String.format("Couldn't create directory %s.", outputFile.getAbsolutePath()));
-					}
-				}
-			} else {
-				final OutputStream outputFileStream = new FileOutputStream(outputFile);
-				IOUtils.copy(debInputStream, outputFileStream);
-				outputFileStream.close();
-			}
-			untaredFiles.add(outputFile);
-		}
-		debInputStream.close();
+    private static File[] unTar(final File inputFile, final File outputDir)
+            throws FileNotFoundException, IOException, ArchiveException {
+        // from
+        // http://stackoverflow.com/questions/315618/how-do-i-extract-a-tar-file-in-java/7556307#7556307
+        log.info("tar xf " + inputFile + " to " + outputDir);
+        final List<File> untaredFiles = new ArrayList<File>();
+        final InputStream is = new FileInputStream(inputFile);
+        final TarArchiveInputStream debInputStream = (TarArchiveInputStream) new ArchiveStreamFactory()
+                .createArchiveInputStream("tar", is);
+        TarArchiveEntry entry = null;
+        while ((entry = (TarArchiveEntry) debInputStream.getNextEntry()) != null) {
+            final File outputFile = new File(outputDir, entry.getName());
+            if (entry.isDirectory()) {
+                if (!outputFile.exists()) {
+                    if (!outputFile.mkdirs()) {
+                        throw new IllegalStateException(
+                                String.format("Couldn't create directory %s.", outputFile.getAbsolutePath()));
+                    }
+                }
+            } else {
+                final OutputStream outputFileStream = new FileOutputStream(outputFile);
+                IOUtils.copy(debInputStream, outputFileStream);
+                outputFileStream.close();
+            }
+            untaredFiles.add(outputFile);
+        }
+        debInputStream.close();
 
-		return untaredFiles.toArray(new File[0]);
-	}
+        return untaredFiles.toArray(new File[0]);
+    }
 
-	@Override
-	public void close() throws Exception {
-		log.info("rm -rf " + tempDirectory);
-		rmdirWithoutSymbolicLinks(tempDirectory);
-	}
+    @Override
+    public void close() throws Exception {
+        log.info("rm -rf " + tempDirectory);
+        rmdirWithoutSymbolicLinks(tempDirectory);
+    }
 
-	private static void rmdirWithoutSymbolicLinks(File dir) {
-		// delete contents recursively
-		for (File f : dir.listFiles()) {
-			if (f.isDirectory()) {
-				rmdirWithoutSymbolicLinks(f);
-			} else {
-				f.delete();
-			}
-		}
-		dir.delete();
-	}
+    private static void rmdirWithoutSymbolicLinks(File dir) {
+        // delete contents recursively
+        for (File f : dir.listFiles()) {
+            if (f.isDirectory()) {
+                rmdirWithoutSymbolicLinks(f);
+            } else {
+                f.delete();
+            }
+        }
+        dir.delete();
+    }
 
-	public static void main(String[] args) throws Exception {
-		String tarFile = "/Users/vlakshmanan/data/nexrad/2016%2F05%2F03%2FKAMA%2FNWS_NEXRAD_NXL2DP_KAMA_20160503090000_20160503095959.tar";
-		// String tarFile =
-		// "gs://gcp-public-data-nexrad-l2/2016/05/03/KAMA/NWS_NEXRAD_NXL2DP_KAMA_20160503000000_20160503005959.tar";
+    public static void main(String[] args) throws Exception {
+        String tarFile = "/Users/vlakshmanan/data/nexrad/2016%2F05%2F03%2FKAMA%2FNWS_NEXRAD_NXL2DP_KAMA_20160503090000_20160503095959.tar";
+        // String tarFile =
+        // "gs://gcp-public-data-nexrad-l2/2016/05/03/KAMA/NWS_NEXRAD_NXL2DP_KAMA_20160503000000_20160503005959.tar";
 
-		System.out.println("Reading " + tarFile);
-		try (GcsUntar untar = GcsUntar.fromGcsOrLocal(tarFile)) {
-			for (File f : untar.getFiles()) {
-				System.out.println(f.getName());
-			}
-		}
-	}
+        System.out.println("Reading " + tarFile);
+        try (GcsUntar untar = GcsUntar.fromGcsOrLocal(tarFile)) {
+            for (File f : untar.getFiles()) {
+                System.out.println(f.getName());
+            }
+        }
+    }
 
 }
