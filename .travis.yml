@@ -1,5 +1,5 @@
 language: java
-script: mvn clean package
+script: mvn clean site
 
 deploy: # Publish static Doxygen html files to gh-pages branch, accessible at https://<username>.github.io/PSMoveSteamVRBridge
   provider: pages
