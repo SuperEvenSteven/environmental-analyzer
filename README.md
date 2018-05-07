@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/SuperEvenSteven/environmental-analyzer.svg?branch=master)](https://travis-ci.org/SuperEvenSteven/environmental-analyzer) [![MIT Licence](https://badges.frapsoft.com/os/mit/mit.svg?v=103)](https://opensource.org/licenses/mit-license.php)
+[![Build Status](https://travis-ci.org/SuperEvenSteven/environmental-analyzer.svg?branch=master)](https://travis-ci.org/SuperEvenSteven/environmental-analyzer) [![MIT Licence](https://badges.frapsoft.com/os/mit/mit.svg?v=103)](https://opensource.org/licenses/mit-license.php) [![Documentation](https://img.shields.io/badge/code-documented-brightgreen.svg)](https://superevensteven.github.io/environmental-analyzer/index.html)
 
 # environmental-analyzer
 Uses Apache Beam to create a distributed data pipeline that combines NexRAD and GSOD datasets to CSV output.
