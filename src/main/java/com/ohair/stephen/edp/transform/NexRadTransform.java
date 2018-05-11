@@ -71,10 +71,13 @@ public final class NexRadTransform extends PTransform<PCollection<String>, PColl
 	}
 
 	/**
-	 * Takes a NexRad date time and formats it to a {@link java.util.Data} as UTC.
+	 * Takes a NexRad date time and formats it to a {@link java.util.Date} as UTC.
 	 * 
 	 * @param date
+	 *            NexRAD date in string format
+	 * @return java.util.Date date as UTC
 	 * @throws ParseException
+	 *             when unable to parse NexRAD date string
 	 */
 
 	@VisibleForTesting

@@ -46,6 +46,13 @@ public final class BatchProcessPipeline {
 	/**
 	 * Join the GSOD and NexRad collections, using station name code as the key.
 	 */
+	/**
+	 * @param gsodDataModel
+	 *            Global daily surface data model
+	 * @param nexRadDataModel
+	 *            NexRAD Level II data model
+	 * @return combined GSOD and NexRAD data model
+	 */
 	private static PCollection<CombinedDataModel> joinDataSets(PCollection<GSODDataModel> gsodDataModel,
 			PCollection<NexRadDataModel> nexRadDataModel) {
 
@@ -92,8 +99,7 @@ public final class BatchProcessPipeline {
 	 * Runs the pipeline batch process.
 	 * 
 	 * @param options
-	 *            - specified at runtime
-	 * @throws Exception
+	 *            specified at runtime
 	 */
 	private static void runBatchProcess(BatchProcessOptions options) {
 		// specify temp location based on output location

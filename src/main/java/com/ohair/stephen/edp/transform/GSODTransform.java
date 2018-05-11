@@ -157,7 +157,8 @@ public final class GSODTransform extends PTransform<PCollection<TableRow>, PColl
 	 * Converts given temperature from Farenheit to Celsius degrees.
 	 * 
 	 * @param temperatureF
-	 * @return temperatureC
+	 *            in farenheit degrees
+	 * @return temperatureC in celsius degrees
 	 */
 	@VisibleForTesting
 	static double asCelsiusDeg(double temperatureF) {
@@ -165,13 +166,16 @@ public final class GSODTransform extends PTransform<PCollection<TableRow>, PColl
 	}
 
 	/**
-	 * Returns a BigQuery standard sql date in the canonical format
+	 * Returns a BigQuery standard SQL date in the canonical format
 	 * 'YYYY-[M]M-[D]D'.
 	 * 
 	 * @param year
+	 *            YYYY
 	 * @param month
+	 *            [M]M
 	 * @param day
-	 * @return
+	 *            [D]D
+	 * @return formatted BigQuery SQL date.
 	 */
 	@VisibleForTesting
 	static String toBQDate(String year, String month, String day) {
@@ -184,8 +188,11 @@ public final class GSODTransform extends PTransform<PCollection<TableRow>, PColl
 	 * Returns
 	 * 
 	 * @param year
+	 *            YYYY
 	 * @param month
+	 *            [M]M
 	 * @param day
+	 *            [D]D
 	 * @return java.util.Date
 	 */
 	@VisibleForTesting

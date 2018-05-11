@@ -25,4 +25,13 @@
 		<menu ref="reports" />
 		<footer />
 	</body>
+
+	<custom>
+		<fluidoSkin>
+			<topBarEnabled>true</topBarEnabled>
+			<topBarContainerStyle>width: 90%;</topBarContainerStyle>
+			<sourceLineNumbersEnabled>true</sourceLineNumbersEnabled>
+		</fluidoSkin>
+	</custom>
+
 </project>
