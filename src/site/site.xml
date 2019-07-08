@@ -11,21 +11,22 @@
 
 	<publishDate position="right" format="MMMM dd, yyyy" />
 	<version />
-	<poweredBy>
-		<logo img="#" alt="" />
-	</poweredBy>
 
 	<skin>
 		<groupId>org.apache.maven.skins</groupId>
 		<artifactId>maven-fluido-skin</artifactId>
-		<version>1.4</version>
+		<version>1.7</version>
 	</skin>
 
 	<body>
+	   <menu name="Overview">
+            <item name="Project README" href="index.html" />
+        </menu>
 		<menu ref="reports" />
 		<footer />
 	</body>
 
+<!--
 	<custom>
 		<fluidoSkin>
 			<topBarEnabled>true</topBarEnabled>
@@ -33,5 +34,5 @@
 			<sourceLineNumbersEnabled>true</sourceLineNumbersEnabled>
 		</fluidoSkin>
 	</custom>
-
+-->
 </project>

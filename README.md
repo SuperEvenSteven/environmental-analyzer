@@ -21,3 +21,8 @@ Uses Apache Beam to create a distributed data pipeline that combines NexRAD and 
 For all files in this repository that don't contain explicit licensing, the MIT license then applies.
 See the accompanying LICENSE for more details.
 
+## Visualized Batch Job
+Here's an example run using google cloud platform.
+
+![gcp_batch_job.png](gcp_batch_job.png)
+
