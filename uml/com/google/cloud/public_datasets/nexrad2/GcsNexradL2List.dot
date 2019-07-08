@@ -10,19 +10,10 @@ digraph G {
 	nodesep=0.25;
 	ranksep=0.5;
 	// com.google.cloud.public_datasets.nexrad2.GcsNexradL2List
-	c330 [label=<<table title="com.google.cloud.public_datasets.nexrad2.GcsNexradL2List" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./GcsNexradL2List.html">
+	c296 [label=<<table title="com.google.cloud.public_datasets.nexrad2.GcsNexradL2List" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./GcsNexradL2List.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> GcsNexradL2List </td></tr>
 		</table></td></tr>
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="left" balign="left">  </td></tr>
-		</table></td></tr>
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="left" balign="left"> + GcsNexradL2List() </td></tr>
-<tr><td align="left" balign="left"> + getFiles(radar : String, year : int, month : int, day : int) : List&lt;String&gt; </td></tr>
-<tr><td align="left" balign="left"> + getFiles(radar : String, year : int, month : int) : List&lt;String&gt; </td></tr>
-<tr><td align="left" balign="left"> + main(args : String[]) </td></tr>
-		</table></td></tr>
-		</table>>, URL="./GcsNexradL2List.html", fontname="Helvetica", fontcolor="black", fontsize=9.0];
+		</table>>, URL="./GcsNexradL2List.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 }
 

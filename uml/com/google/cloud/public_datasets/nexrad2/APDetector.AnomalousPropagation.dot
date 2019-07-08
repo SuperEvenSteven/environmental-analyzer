@@ -10,21 +10,10 @@ digraph G {
 	nodesep=0.25;
 	ranksep=0.5;
 	// com.google.cloud.public_datasets.nexrad2.APDetector.AnomalousPropagation
-	c134 [label=<<table title="com.google.cloud.public_datasets.nexrad2.APDetector.AnomalousPropagation" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./APDetector.AnomalousPropagation.html">
+	c128 [label=<<table title="com.google.cloud.public_datasets.nexrad2.APDetector.AnomalousPropagation" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./APDetector.AnomalousPropagation.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> AnomalousPropagation </td></tr>
 		</table></td></tr>
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="left" balign="left"> + radarId : String </td></tr>
-<tr><td align="left" balign="left"> + time : Date </td></tr>
-<tr><td align="left" balign="left"> + azimuth : float </td></tr>
-<tr><td align="left" balign="left"> + range : float </td></tr>
-		</table></td></tr>
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="left" balign="left"> + AnomalousPropagation(radarId : String, time : Date, azimuth : float, range : float) </td></tr>
-<tr><td align="left" balign="left"> + AnomalousPropagation() </td></tr>
-<tr><td align="left" balign="left"> + toCsv() : String </td></tr>
-		</table></td></tr>
-		</table>>, URL="./APDetector.AnomalousPropagation.html", fontname="Helvetica", fontcolor="black", fontsize=9.0];
+		</table>>, URL="./APDetector.AnomalousPropagation.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 }
 

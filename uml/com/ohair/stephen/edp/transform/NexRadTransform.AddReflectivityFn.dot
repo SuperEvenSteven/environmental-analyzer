@@ -10,38 +10,18 @@ digraph G {
 	nodesep=0.25;
 	ranksep=0.5;
 	// com.ohair.stephen.edp.transform.NexRadTransform.AddReflectivityFn
-	c456 [label=<<table title="com.ohair.stephen.edp.transform.NexRadTransform.AddReflectivityFn" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./NexRadTransform.AddReflectivityFn.html">
+	c393 [label=<<table title="com.ohair.stephen.edp.transform.NexRadTransform.AddReflectivityFn" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./NexRadTransform.AddReflectivityFn.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> AddReflectivityFn </td></tr>
 		</table></td></tr>
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="left" balign="left"> - log : Logger </td></tr>
-		</table></td></tr>
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="left" balign="left"> ~ AddReflectivityFn() </td></tr>
-<tr><td align="left" balign="left"> + processElement(c : DoFn.ProcessContext&lt;&gt;) </td></tr>
-		</table></td></tr>
-		</table>>, URL="./NexRadTransform.AddReflectivityFn.html", fontname="Helvetica", fontcolor="black", fontsize=9.0];
+		</table>>, URL="./NexRadTransform.AddReflectivityFn.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	//com.ohair.stephen.edp.transform.NexRadTransform.AddReflectivityFn extends org.apache.beam.sdk.transforms.DoFn<java.lang.String, com.ohair.stephen.edp.model.NexRadDataModel>
-	c459:p -> c456:p [dir=back,arrowtail=empty];
-	// com.ohair.stephen.edp.transform.NexRadTransform.AddReflectivityFn DEPEND org.apache.beam.sdk.transforms.DoFn<InputT, OutputT>.ProcessContext
-	c456:p -> c459:p [taillabel="", label="", headlabel="", fontname="Helvetica", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
+	c408:p -> c393:p [dir=back,arrowtail=empty];
 	// org.apache.beam.sdk.transforms.DoFn<InputT, OutputT>
-	c459 [label=<<table title="org.apache.beam.sdk.transforms.DoFn" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://java.sun.com/j2se/1.4.2/docs/api/org/apache/beam/sdk/transforms/DoFn.html">
+	c408 [label=<<table title="org.apache.beam.sdk.transforms.DoFn" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://java.sun.com/j2se/1.4.2/docs/api/org/apache/beam/sdk/transforms/DoFn.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"><font face="Helvetica-Oblique"> DoFn&lt;InputT, OutputT&gt; </font></td></tr>
 		</table></td></tr>
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="left" balign="left"> - PROCESS_CONTINUATION_STOP : DoFn.ProcessContinuation </td></tr>
-		</table></td></tr>
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="left" balign="left"> + DoFn() </td></tr>
-<tr><td align="left" balign="left"> + getAllowedTimestampSkew() : Duration </td></tr>
-<tr><td align="left" balign="left"> + getInputTypeDescriptor() : TypeDescriptor&lt;InputT&gt; </td></tr>
-<tr><td align="left" balign="left"> + getOutputTypeDescriptor() : TypeDescriptor&lt;OutputT&gt; </td></tr>
-<tr><td align="left" balign="left"> + prepareForProcessing() </td></tr>
-<tr><td align="left" balign="left"> + populateDisplayData(arg0 : DisplayData.Builder) </td></tr>
-		</table></td></tr>
-		</table>>, URL="http://java.sun.com/j2se/1.4.2/docs/api/org/apache/beam/sdk/transforms/DoFn.html", fontname="Helvetica", fontcolor="black", fontsize=9.0];
+		</table>>, URL="http://java.sun.com/j2se/1.4.2/docs/api/org/apache/beam/sdk/transforms/DoFn.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 }
 

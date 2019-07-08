@@ -10,46 +10,19 @@ digraph G {
 	nodesep=0.25;
 	ranksep=0.5;
 	// com.google.cloud.public_datasets.nexrad2.GcsUntar
-	c367 [label=<<table title="com.google.cloud.public_datasets.nexrad2.GcsUntar" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./GcsUntar.html">
+	c328 [label=<<table title="com.google.cloud.public_datasets.nexrad2.GcsUntar" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./GcsUntar.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> GcsUntar </td></tr>
 		</table></td></tr>
+		</table>>, URL="./GcsUntar.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	//com.google.cloud.public_datasets.nexrad2.GcsUntar implements java.lang.AutoCloseable
+	c334:p -> c328:p [dir=back,arrowtail=empty,style=dashed];
+	// java.lang.AutoCloseable
+	c334 [label=<<table title="java.lang.AutoCloseable" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://java.sun.com/j2se/1.4.2/docs/api/java/lang/AutoCloseable.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="left" balign="left"> - log : Logger </td></tr>
-<tr><td align="left" balign="left"> - tarFileLocation : File </td></tr>
-<tr><td align="left" balign="left"> - tempDirectory : File </td></tr>
-<tr><td align="left" balign="left"> - untarred : File[] </td></tr>
+<tr><td align="center" balign="center"> &#171;interface&#187; </td></tr>
+<tr><td align="center" balign="center"> AutoCloseable </td></tr>
 		</table></td></tr>
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="left" balign="left"> - GcsUntar(tarFileLocation : File, tempDirectory : File) </td></tr>
-<tr><td align="left" balign="left"> + fromLocalTar(tarFileName : File) : GcsUntar </td></tr>
-<tr><td align="left" balign="left"> + fromGcsTar(bucket : String, blobName : String) : GcsUntar </td></tr>
-<tr><td align="left" balign="left"> + fromGcsOrLocal(gcsOrLocal : String) : GcsUntar </td></tr>
-<tr><td align="left" balign="left"> + getFiles() : File[] </td></tr>
-<tr><td align="left" balign="left"> - downloadFromGcs(bucketName : String, blobName : String, tmpDir : File) : File </td></tr>
-<tr><td align="left" balign="left"> - unTar(inputFile : File, outputDir : File) : File[] </td></tr>
-<tr><td align="left" balign="left"> + close() </td></tr>
-<tr><td align="left" balign="left"> - rmdirWithoutSymbolicLinks(dir : File) </td></tr>
-<tr><td align="left" balign="left"> + main(args : String[]) </td></tr>
-		</table></td></tr>
-		</table>>, URL="./GcsUntar.html", fontname="Helvetica", fontcolor="black", fontsize=9.0];
-	// com.google.cloud.public_datasets.nexrad2.GcsNexradL2Read
-	c368 [label=<<table title="com.google.cloud.public_datasets.nexrad2.GcsNexradL2Read" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./GcsNexradL2Read.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> GcsNexradL2Read </td></tr>
-		</table></td></tr>
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="left" balign="left"> - untar : GcsUntar </td></tr>
-		</table></td></tr>
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="left" balign="left"> + GcsNexradL2Read(tarFileName : String) </td></tr>
-<tr><td align="left" balign="left"> + close() </td></tr>
-<tr><td align="left" balign="left"> + getVolumeScans() : RadialDatasetSweep[] </td></tr>
-<tr><td align="left" balign="left"> + getDataVariable(volume : RadialDatasetSweep, name : String) : RadialDatasetSweep.RadialVariable </td></tr>
-<tr><td align="left" balign="left"> + main(args : String[]) </td></tr>
-		</table></td></tr>
-		</table>>, URL="./GcsNexradL2Read.html", fontname="Helvetica", fontcolor="black", fontsize=9.0];
-	// com.google.cloud.public_datasets.nexrad2.GcsNexradL2Read NAVASSOC com.google.cloud.public_datasets.nexrad2.GcsUntar
-	c368:p -> c367:p [taillabel="", label="", headlabel="", fontname="Helvetica", fontcolor="black", fontsize=10.0, color="black", arrowhead=open];
+		</table>>, URL="http://java.sun.com/j2se/1.4.2/docs/api/java/lang/AutoCloseable.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 }
 

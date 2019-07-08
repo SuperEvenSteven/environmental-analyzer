@@ -10,37 +10,10 @@ digraph G {
 	nodesep=0.25;
 	ranksep=0.5;
 	// com.ohair.stephen.edp.model.NexRadDataModel
-	c392 [label=<<table title="com.ohair.stephen.edp.model.NexRadDataModel" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./NexRadDataModel.html">
+	c339 [label=<<table title="com.ohair.stephen.edp.model.NexRadDataModel" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" bgcolor="lemonChiffon" href="./NexRadDataModel.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> NexRadDataModel </td></tr>
 		</table></td></tr>
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="left" balign="left"> - stationName : String </td></tr>
-<tr><td align="left" balign="left"> - dateUtc : Date </td></tr>
-		</table></td></tr>
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="left" balign="left"> + NexRadDataModel(builder : NexRadDataModel.ModelBuilder) </td></tr>
-<tr><td align="left" balign="left"> + toCsv() : String </td></tr>
-<tr><td align="left" balign="left"> + tableSchema() : TableSchema </td></tr>
-		</table></td></tr>
-		</table>>, URL="./NexRadDataModel.html", fontname="Helvetica", fontcolor="black", fontsize=9.0];
-	// com.ohair.stephen.edp.model.NexRadDataModel DEPEND com.google.api.services.bigquery.model.TableSchema
-	c392:p -> c402:p [taillabel="", label="", headlabel="", fontname="Helvetica", fontcolor="black", fontsize=10.0, color="black", arrowhead=open, style=dashed];
-	// com.google.api.services.bigquery.model.TableSchema
-	c402 [label=<<table title="com.google.api.services.bigquery.model.TableSchema" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="http://java.sun.com/j2se/1.4.2/docs/api/com/google/api/services/bigquery/model/TableSchema.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> TableSchema </td></tr>
-		</table></td></tr>
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="left" balign="left"> - fields : List&lt;TableFieldSchema&gt; </td></tr>
-		</table></td></tr>
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="left" balign="left"> + TableSchema() </td></tr>
-<tr><td align="left" balign="left"> + getFields() : List&lt;TableFieldSchema&gt; </td></tr>
-<tr><td align="left" balign="left"> + setFields(arg0 : List&lt;TableFieldSchema&gt;) : TableSchema </td></tr>
-<tr><td align="left" balign="left"> + set(arg0 : String, arg1 : Object) : TableSchema </td></tr>
-<tr><td align="left" balign="left"> + clone() : TableSchema </td></tr>
-		</table></td></tr>
-		</table>>, URL="http://java.sun.com/j2se/1.4.2/docs/api/com/google/api/services/bigquery/model/TableSchema.html", fontname="Helvetica", fontcolor="black", fontsize=9.0];
+		</table>>, URL="./NexRadDataModel.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 }
 

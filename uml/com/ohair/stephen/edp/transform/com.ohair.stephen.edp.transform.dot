@@ -9,71 +9,29 @@ digraph G {
 	node [fontname="Helvetica",fontsize=10,shape=plaintext];
 	nodesep=0.25;
 	ranksep=0.5;
-	// com.ohair.stephen.edp.transform.NexRadTransform
-	c68 [label=<<table title="com.ohair.stephen.edp.transform.NexRadTransform" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./NexRadTransform.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> NexRadTransform </td></tr>
-		</table></td></tr>
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="left" balign="left">  </td></tr>
-		</table></td></tr>
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="left" balign="left"> + NexRadTransform() </td></tr>
-<tr><td align="left" balign="left"> + expand(elements : PCollection&lt;String&gt;) : PCollection&lt;NexRadDataModel&gt; </td></tr>
-<tr><td align="left" balign="left"> ~ formatDateUtc(date : String) : Date </td></tr>
-		</table></td></tr>
-		</table>>, URL="./NexRadTransform.html", fontname="Helvetica", fontcolor="black", fontsize=9.0];
-	// com.ohair.stephen.edp.transform.NexRadTransform.AddReflectivityFn
-	c69 [label=<<table title="com.ohair.stephen.edp.transform.NexRadTransform.AddReflectivityFn" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./NexRadTransform.AddReflectivityFn.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> AddReflectivityFn </td></tr>
-		</table></td></tr>
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="left" balign="left"> - log : Logger </td></tr>
-		</table></td></tr>
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="left" balign="left"> ~ AddReflectivityFn() </td></tr>
-<tr><td align="left" balign="left"> + processElement(c : DoFn.ProcessContext&lt;&gt;) </td></tr>
-		</table></td></tr>
-		</table>>, URL="./NexRadTransform.AddReflectivityFn.html", fontname="Helvetica", fontcolor="black", fontsize=9.0];
 	// com.ohair.stephen.edp.transform.GSODTransform
-	c70 [label=<<table title="com.ohair.stephen.edp.transform.GSODTransform" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./GSODTransform.html">
+	c0 [label=<<table title="com.ohair.stephen.edp.transform.GSODTransform" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./GSODTransform.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> GSODTransform </td></tr>
 		</table></td></tr>
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="left" balign="left">  </td></tr>
-		</table></td></tr>
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="left" balign="left"> + GSODTransform() </td></tr>
-<tr><td align="left" balign="left"> + expand(rows : PCollection&lt;TableRow&gt;) : PCollection&lt;GSODDataModel&gt; </td></tr>
-<tr><td align="left" balign="left"> ~ asCelsiusDeg(temperatureF : double) : double </td></tr>
-<tr><td align="left" balign="left"> ~ toBQDate(year : String, month : String, day : String) : String </td></tr>
-<tr><td align="left" balign="left"> ~ asDateUtc(year : String, month : String, day : String) : Date </td></tr>
-		</table></td></tr>
-		</table>>, URL="./GSODTransform.html", fontname="Helvetica", fontcolor="black", fontsize=9.0];
+		</table>>, URL="./GSODTransform.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.ohair.stephen.edp.transform.GSODTransform.SimplifyAndFilterPrecipitationFn
-	c71 [label=<<table title="com.ohair.stephen.edp.transform.GSODTransform.SimplifyAndFilterPrecipitationFn" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./GSODTransform.SimplifyAndFilterPrecipitationFn.html">
+	c1 [label=<<table title="com.ohair.stephen.edp.transform.GSODTransform.SimplifyAndFilterPrecipitationFn" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./GSODTransform.SimplifyAndFilterPrecipitationFn.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> SimplifyAndFilterPrecipitationFn </td></tr>
 		</table></td></tr>
+		</table>>, URL="./GSODTransform.SimplifyAndFilterPrecipitationFn.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.ohair.stephen.edp.transform.NexRadTransform
+	c2 [label=<<table title="com.ohair.stephen.edp.transform.NexRadTransform" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./NexRadTransform.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="left" balign="left"> - log : Logger </td></tr>
-<tr><td align="left" balign="left"> - MISSING_PRECIPITATION : double </td></tr>
-<tr><td align="left" balign="left"> - MISSING_TEMP : double </td></tr>
-<tr><td align="left" balign="left"> - MINESCULE_TRACE_AMOUNT : double </td></tr>
-<tr><td align="left" balign="left"> - CMS_PER_INCH : double </td></tr>
-<tr><td align="left" balign="left"> - NO_TEMP_COUNTS : int </td></tr>
-<tr><td align="left" balign="left"> - containPrecipitation : Counter </td></tr>
-<tr><td align="left" balign="left"> - missingPrecipitation : Counter </td></tr>
-<tr><td align="left" balign="left"> - missingMeanTemps : Counter </td></tr>
-<tr><td align="left" balign="left"> - missingTempCounts : Counter </td></tr>
-<tr><td align="left" balign="left"> - newModelElement : Counter </td></tr>
+<tr><td align="center" balign="center"> NexRadTransform </td></tr>
 		</table></td></tr>
+		</table>>, URL="./NexRadTransform.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.ohair.stephen.edp.transform.NexRadTransform.AddReflectivityFn
+	c3 [label=<<table title="com.ohair.stephen.edp.transform.NexRadTransform.AddReflectivityFn" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./NexRadTransform.AddReflectivityFn.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="left" balign="left"> ~ SimplifyAndFilterPrecipitationFn() </td></tr>
-<tr><td align="left" balign="left"> + processElement(c : DoFn.ProcessContext&lt;&gt;) </td></tr>
+<tr><td align="center" balign="center"> AddReflectivityFn </td></tr>
 		</table></td></tr>
-		</table>>, URL="./GSODTransform.SimplifyAndFilterPrecipitationFn.html", fontname="Helvetica", fontcolor="black", fontsize=9.0];
+		</table>>, URL="./NexRadTransform.AddReflectivityFn.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 }
 

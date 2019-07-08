@@ -9,110 +9,41 @@ digraph G {
 	node [fontname="Helvetica",fontsize=10,shape=plaintext];
 	nodesep=0.25;
 	ranksep=0.5;
-	// com.google.cloud.public_datasets.nexrad2.NexRadUtils
-	c0 [label=<<table title="com.google.cloud.public_datasets.nexrad2.NexRadUtils" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./NexRadUtils.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> NexRadUtils </td></tr>
-		</table></td></tr>
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="left" balign="left">  </td></tr>
-		</table></td></tr>
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="left" balign="left"> + NexRadUtils() </td></tr>
-<tr><td align="left" balign="left"> + getTarNameParams(options : BatchProcessOptions) : List&lt;String&gt; </td></tr>
-<tr><td align="left" balign="left"> - toIntArray(s : String[]) : int[] </td></tr>
-<tr><td align="left" balign="left"> + rebundle(name : String, inputs : PCollection&lt;T&gt;, nbundles : int) : PCollection&lt;T&gt; </td></tr>
-		</table></td></tr>
-		</table>>, URL="./NexRadUtils.html", fontname="Helvetica", fontcolor="black", fontsize=9.0];
 	// com.google.cloud.public_datasets.nexrad2.GcsUntar
-	c1 [label=<<table title="com.google.cloud.public_datasets.nexrad2.GcsUntar" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./GcsUntar.html">
+	c66 [label=<<table title="com.google.cloud.public_datasets.nexrad2.GcsUntar" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./GcsUntar.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> GcsUntar </td></tr>
 		</table></td></tr>
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="left" balign="left"> - log : Logger </td></tr>
-<tr><td align="left" balign="left"> - tarFileLocation : File </td></tr>
-<tr><td align="left" balign="left"> - tempDirectory : File </td></tr>
-<tr><td align="left" balign="left"> - untarred : File[] </td></tr>
-		</table></td></tr>
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="left" balign="left"> - GcsUntar(tarFileLocation : File, tempDirectory : File) </td></tr>
-<tr><td align="left" balign="left"> + fromLocalTar(tarFileName : File) : GcsUntar </td></tr>
-<tr><td align="left" balign="left"> + fromGcsTar(bucket : String, blobName : String) : GcsUntar </td></tr>
-<tr><td align="left" balign="left"> + fromGcsOrLocal(gcsOrLocal : String) : GcsUntar </td></tr>
-<tr><td align="left" balign="left"> + getFiles() : File[] </td></tr>
-<tr><td align="left" balign="left"> - downloadFromGcs(bucketName : String, blobName : String, tmpDir : File) : File </td></tr>
-<tr><td align="left" balign="left"> - unTar(inputFile : File, outputDir : File) : File[] </td></tr>
-<tr><td align="left" balign="left"> + close() </td></tr>
-<tr><td align="left" balign="left"> - rmdirWithoutSymbolicLinks(dir : File) </td></tr>
-<tr><td align="left" balign="left"> + main(args : String[]) </td></tr>
-		</table></td></tr>
-		</table>>, URL="./GcsUntar.html", fontname="Helvetica", fontcolor="black", fontsize=9.0];
+		</table>>, URL="./GcsUntar.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.google.cloud.public_datasets.nexrad2.GcsNexradL2Read
-	c2 [label=<<table title="com.google.cloud.public_datasets.nexrad2.GcsNexradL2Read" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./GcsNexradL2Read.html">
+	c67 [label=<<table title="com.google.cloud.public_datasets.nexrad2.GcsNexradL2Read" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./GcsNexradL2Read.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> GcsNexradL2Read </td></tr>
 		</table></td></tr>
+		</table>>, URL="./GcsNexradL2Read.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.google.cloud.public_datasets.nexrad2.NexRadUtils
+	c68 [label=<<table title="com.google.cloud.public_datasets.nexrad2.NexRadUtils" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./NexRadUtils.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="left" balign="left"> - untar : GcsUntar </td></tr>
+<tr><td align="center" balign="center"> NexRadUtils </td></tr>
 		</table></td></tr>
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="left" balign="left"> + GcsNexradL2Read(tarFileName : String) </td></tr>
-<tr><td align="left" balign="left"> + close() </td></tr>
-<tr><td align="left" balign="left"> + getVolumeScans() : RadialDatasetSweep[] </td></tr>
-<tr><td align="left" balign="left"> + getDataVariable(volume : RadialDatasetSweep, name : String) : RadialDatasetSweep.RadialVariable </td></tr>
-<tr><td align="left" balign="left"> + main(args : String[]) </td></tr>
-		</table></td></tr>
-		</table>>, URL="./GcsNexradL2Read.html", fontname="Helvetica", fontcolor="black", fontsize=9.0];
-	// com.google.cloud.public_datasets.nexrad2.GcsNexradL2List
-	c3 [label=<<table title="com.google.cloud.public_datasets.nexrad2.GcsNexradL2List" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./GcsNexradL2List.html">
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="center" balign="center"> GcsNexradL2List </td></tr>
-		</table></td></tr>
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="left" balign="left">  </td></tr>
-		</table></td></tr>
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="left" balign="left"> + GcsNexradL2List() </td></tr>
-<tr><td align="left" balign="left"> + getFiles(radar : String, year : int, month : int, day : int) : List&lt;String&gt; </td></tr>
-<tr><td align="left" balign="left"> + getFiles(radar : String, year : int, month : int) : List&lt;String&gt; </td></tr>
-<tr><td align="left" balign="left"> + main(args : String[]) </td></tr>
-		</table></td></tr>
-		</table>>, URL="./GcsNexradL2List.html", fontname="Helvetica", fontcolor="black", fontsize=9.0];
+		</table>>, URL="./NexRadUtils.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.google.cloud.public_datasets.nexrad2.APDetector
-	c4 [label=<<table title="com.google.cloud.public_datasets.nexrad2.APDetector" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./APDetector.html">
+	c69 [label=<<table title="com.google.cloud.public_datasets.nexrad2.APDetector" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./APDetector.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> APDetector </td></tr>
 		</table></td></tr>
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="left" balign="left"> - log : Logger </td></tr>
-		</table></td></tr>
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="left" balign="left"> + APDetector() </td></tr>
-<tr><td align="left" balign="left"> + findAP(volume : RadialDatasetSweep) : List&lt;APDetector.AnomalousPropagation&gt; </td></tr>
-<tr><td align="left" balign="left"> - getAlignedData(fromData : RadialDatasetSweep.Sweep, toGeometry : RadialDatasetSweep.Sweep) : float[][] </td></tr>
-<tr><td align="left" balign="left"> - findClosestRadial(data : RadialDatasetSweep.Sweep, azimuth : float, tol : float) : int </td></tr>
-<tr><td align="left" balign="left"> + main(args : String[]) </td></tr>
-		</table></td></tr>
-		</table>>, URL="./APDetector.html", fontname="Helvetica", fontcolor="black", fontsize=9.0];
+		</table>>, URL="./APDetector.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 	// com.google.cloud.public_datasets.nexrad2.APDetector.AnomalousPropagation
-	c5 [label=<<table title="com.google.cloud.public_datasets.nexrad2.APDetector.AnomalousPropagation" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./APDetector.AnomalousPropagation.html">
+	c70 [label=<<table title="com.google.cloud.public_datasets.nexrad2.APDetector.AnomalousPropagation" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./APDetector.AnomalousPropagation.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
 <tr><td align="center" balign="center"> AnomalousPropagation </td></tr>
 		</table></td></tr>
+		</table>>, URL="./APDetector.AnomalousPropagation.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
+	// com.google.cloud.public_datasets.nexrad2.GcsNexradL2List
+	c71 [label=<<table title="com.google.cloud.public_datasets.nexrad2.GcsNexradL2List" border="0" cellborder="1" cellspacing="0" cellpadding="2" port="p" href="./GcsNexradL2List.html">
 		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="left" balign="left"> + radarId : String </td></tr>
-<tr><td align="left" balign="left"> + time : Date </td></tr>
-<tr><td align="left" balign="left"> + azimuth : float </td></tr>
-<tr><td align="left" balign="left"> + range : float </td></tr>
+<tr><td align="center" balign="center"> GcsNexradL2List </td></tr>
 		</table></td></tr>
-		<tr><td><table border="0" cellspacing="0" cellpadding="1">
-<tr><td align="left" balign="left"> + AnomalousPropagation(radarId : String, time : Date, azimuth : float, range : float) </td></tr>
-<tr><td align="left" balign="left"> + AnomalousPropagation() </td></tr>
-<tr><td align="left" balign="left"> + toCsv() : String </td></tr>
-		</table></td></tr>
-		</table>>, URL="./APDetector.AnomalousPropagation.html", fontname="Helvetica", fontcolor="black", fontsize=9.0];
-	// com.google.cloud.public_datasets.nexrad2.GcsNexradL2Read NAVASSOC com.google.cloud.public_datasets.nexrad2.GcsUntar
-	c2:p -> c1:p [taillabel="", label="", headlabel="", fontname="Helvetica", fontcolor="black", fontsize=10.0, color="black", arrowhead=open];
+		</table>>, URL="./GcsNexradL2List.html", fontname="Helvetica", fontcolor="black", fontsize=10.0];
 }
 
